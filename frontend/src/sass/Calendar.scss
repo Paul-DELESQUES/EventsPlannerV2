@@ -1,0 +1,45 @@
+@import "./variables";
+
+.calendar-content {
+  width: 100%;
+  .calendar-main {
+    margin: auto;
+    width: 90%;
+
+    h2 {
+      font-size: 2rem;
+    }
+    a {
+      font-size: 1.2rem;
+    }
+    .fc-event {
+      background-color: $clr-tertiary;
+    }
+    .fc-timegrid-slot {
+      height: 3.5rem;
+      font-size: 1.2rem;
+    }
+    .fc-daygrid-slot {
+      height: 3.5rem;
+    }
+    .fc {
+      font-size: 1.5rem;
+      height: 90vh;
+    }
+
+    td {
+      height: 100%;
+      border: 1px solid $clr-grey;
+    }
+    .fc-button {
+      font-size: 0.9rem;
+      background-color: $clr-tertiary;
+    }
+    .fc-button:hover {
+      background: $clr-tertiary;
+    }
+    .fc-button:active {
+      background: $clr-tertiary;
+    }
+  }
+}

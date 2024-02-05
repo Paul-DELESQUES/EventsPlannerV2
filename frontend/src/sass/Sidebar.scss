@@ -1,0 +1,115 @@
+@import "variables";
+
+.sidebar {
+  position: absolute;
+  background-color: $clr-secondary;
+  width: 300px;
+  min-height: 100svh;
+
+  .logo-ctn {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    width: 100%;
+    height: 100px;
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+  }
+  .navbar {
+    margin-top: 5rem;
+    height: 60%;
+
+    .nav-item {
+      margin-bottom: 1rem;
+      height: 80px;
+      list-style: none;
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: flex;
+        height: 44px;
+        border-radius: 8px;
+        padding: 6px 14px;
+        column-gap: 18px;
+        letter-spacing: 0.03rem;
+        border: 1px solid transparent $clr-white;
+        text-decoration: none;
+        color: $clr-tertiary;
+        font-size: 1.5rem;
+
+        &:hover {
+          border: 1px solid $clr-white;
+          width: 90%;
+        }
+        .nav-link-icon {
+          width: 30px;
+          color: $clr-white;
+        }
+        .nav-link-text {
+          font-size: 1.1rem;
+          padding-left: 0.5rem;
+          color: $clr-white;
+        }
+      }
+      .active {
+        background-color: $clr-tertiary;
+        width: 90%;
+        color: $clr-white;
+        box-shadow:
+          rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+          rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+      }
+    }
+  }
+  .profile-content {
+    position: absolute;
+    color: $clr-white;
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    border-top: 2px solid $clr-tertiary;
+
+    .profile {
+      position: relative;
+      padding: 10px 6px;
+      height: 90px;
+      background-color: #a8a3a3;
+
+      .profile-details {
+        display: flex;
+        align-items: center;
+        img {
+          height: 50px;
+          width: 50px;
+          object-fit: cover;
+          margin-left: 10px;
+        }
+        .name-job {
+          margin-left: 20px;
+          .name {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0;
+          }
+          .job {
+            margin-top: 10px;
+            font-size: 0.9rem;
+          }
+        }
+      }
+      .logout-icon {
+        position: absolute;
+        left: 80%;
+        bottom: 25px;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
