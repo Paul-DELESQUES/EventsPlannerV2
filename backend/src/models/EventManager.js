@@ -9,7 +9,10 @@ class EventManager extends AbstractManager {
 
   async createEvent({
     eventType,
-    eventDate,
+    eventStartDate,
+    eventEndDate,
+    startTime,
+    endTime,
     eventLocation,
     guestsNumber,
     childsNumber,
@@ -18,16 +21,22 @@ class EventManager extends AbstractManager {
   }) {
     const [rows] = await this.database.query(
       `insert into ${this.table} (
-          event_type,
-          event_date_start,
-          event_location,
-          guests_number,
-          childs_number,
-          budget,
-          important_note) values (?,?,?,?,?,?,?)`,
+            event_type,
+            event_date_start,
+            event_date_end,
+            start_time, 
+            end_time, 
+            event_location,
+            guests_number,
+            childs_number,
+            budget,
+            important_note) values (?,?,?,?,?,?,?,?,?,?)`,
       [
         eventType,
-        eventDate,
+        eventStartDate,
+        eventEndDate,
+        startTime,
+        endTime,
         eventLocation,
         guestsNumber,
         childsNumber,
