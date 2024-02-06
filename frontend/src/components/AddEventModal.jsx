@@ -11,7 +11,7 @@ function AddEventModal({ visible, onClose, onNext }) {
     padding: "1rem",
     borderRadius: "1.5rem",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
-    width: "70%",
+    width: "60%",
     height: "70%",
   };
   const [eventType, setEventType] = useState("wedding");
@@ -142,7 +142,7 @@ function AddEventModal({ visible, onClose, onNext }) {
             onChange={(e) => setBudget(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div className="input-important">
           <span className="label">Note importante</span>
           <textarea
             rows={10}

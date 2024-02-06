@@ -252,7 +252,7 @@ function AddCustomerModal({ visible, onClose, eventId, onAdd }) {
             city === "" ||
             country === ""
           }
-          className="saveButton"
+          className="saveButton-customers"
           onClick={() => {
             handleSubmitCustomer();
           }}
