@@ -12,11 +12,12 @@ const getFormattedEvents = async () => {
     const start = moment(
       `${dateStart}T${event.startTime}`,
       "YYYY-MM-DDThh:mm:ss"
-    ).toDate();
-    const end = moment(
-      `${dateEnd}T${event.endTime}`,
-      "YYYY-MM-DDThh:mm:ss"
-    ).toDate();
+    )
+      .local()
+      .toDate();
+    const end = moment(`${dateEnd}T${event.endTime}`, "YYYY-MM-DDThh:mm:ss")
+      .local()
+      .toDate();
 
     const eventTypeMapForCalendar = {
       wedding: "Mariage",

@@ -2,43 +2,75 @@
 .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 15% 15% 15% 55%;
   gap: 2rem;
   width: 100%;
-  margin-top: 3rem;
   color: $clr-white;
+  height: 90%;
 
   .input-group {
     margin-left: 1rem;
     padding: 10px 10px;
+
+    .label {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #626262;
+    }
+
+    .input {
+      color: #626262;
+      margin-top: 0.5rem;
+      background-color: $clr-test;
+      outline: none;
+      border: 1px solid $clr-white;
+      font-size: 1rem;
+      font-weight: 300;
+      padding: 10px;
+      width: 70%;
+      border-radius: 8px;
+      resize: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
   }
 
-  .label {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #626262;
-  }
+  .input-important {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+    width: 90%;
 
-  .input {
-    color: #626262;
-    margin-top: 0.5rem;
-    background-color: $clr-test;
-    outline: none;
-    border: 1px solid $clr-white;
-    font-size: 1rem;
-    font-weight: 300;
-    padding: 10px;
-    width: 70%;
-    border-radius: 8px;
-    resize: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    .label {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #626262;
+    }
+
+    .input {
+      color: #626262;
+      margin-top: 0.5rem;
+      background-color: $clr-test;
+      outline: none;
+      border: 1px solid $clr-white;
+      font-size: 1rem;
+      font-weight: 300;
+      padding: 10px;
+      width: 70%;
+      border-radius: 8px;
+      resize: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
   }
 
   .saveButton {
-    grid-column: 3;
-    grid-row: 3;
+    grid-column-start: 3;
+    grid-column-end: 4;
     align-self: end;
     justify-self: end;
-    margin-right: 2rem;
+    margin-right: 3rem;
+    margin-bottom: 4rem;
     width: 6rem;
     background: $clr-tertiary;
     border: none;
@@ -55,10 +87,5 @@
     border: 1px solid $clr-tertiary;
     background: transparent;
     color: $clr-tertiary;
-  }
-  :nth-child(7) {
-    .input {
-      width: 100%;
-    }
   }
 }

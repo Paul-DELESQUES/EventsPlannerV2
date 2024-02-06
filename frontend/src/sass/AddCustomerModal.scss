@@ -108,71 +108,7 @@
     }
   }
 
-  .customer-right {
-    grid-row: 2;
-    grid-column-start: 1;
-    border: 1px solid #000;
-    border-radius: 1rem;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      padding: 10px 10px;
-      width: 30%;
-
-      .label {
-        font-weight: bold;
-        font-size: 0.8rem;
-        color: #626262;
-      }
-
-      .input {
-        color: #626262;
-        margin-top: 0.5rem;
-        background-color: $clr-test;
-        outline: none;
-        border: 1px solid $clr-white;
-        font-size: 1rem;
-        font-weight: 300;
-        padding: 10px;
-        border-radius: 8px;
-        resize: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-      }
-    }
-    .input-address {
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      padding: 10px 10px;
-      width: 90%;
-
-      .label {
-        font-weight: bold;
-        font-size: 0.8rem;
-        color: #626262;
-      }
-
-      .input {
-        color: #626262;
-        margin-top: 0.5rem;
-        background-color: $clr-test;
-        outline: none;
-        border: 1px solid $clr-white;
-        font-size: 1rem;
-        font-weight: 300;
-        padding: 10px;
-        border-radius: 8px;
-        resize: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-      }
-    }
-  }
-  .saveButton {
+  .saveButton-customers {
     grid-column-start: 2;
     align-self: center;
     justify-self: end;
@@ -188,7 +124,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
 
-  .saveButton:disabled {
+  .saveButton-customers:disabled {
     border: 1px solid $clr-tertiary;
     background: transparent;
     color: $clr-tertiary;

@@ -25,11 +25,10 @@ function Calendar() {
           headerToolbar={{
             left: "prev,next today",
             center: "title",
-            right: "timeGridWeek,timeGridDay,dayGridMonth",
+            right: "timeGridWeek,dayGridMonth",
           }}
-          // slotMinTime="07:00"
-          // slotMaxTime="24:00"
           allDaySlot={false}
+          firstDay={1}
           locale="fr"
           initialView="timeGridWeek"
           slotDuration="01:00:00"
