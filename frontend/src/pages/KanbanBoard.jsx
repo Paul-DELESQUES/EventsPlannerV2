@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { FaPlus } from "react-icons/fa";
+import AddCardModal from "../components/AddCardModal";
 import "../sass/KanbanBoard.scss";
 
 const initialDataKanban = {
@@ -31,9 +32,10 @@ const initialDataKanban = {
 
 const KanbanBoard = () => {
   const [dataKanban, setDataKanban] = useState(initialDataKanban);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleAddTask = () => {
-    alert("Ajout de la tache"); // modifier l'alerte à l'avenir pour une modal
+    setIsModalVisible(true);
   };
 
   const onDragEnd = (result) => {
@@ -151,6 +153,14 @@ const KanbanBoard = () => {
           })}
         </div>
       </DragDropContext>
+      <AddCardModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        handleCardAdd={(title, description) => {
+          console.log(title, description);
+          setIsModalVisible(false);
+        }}
+      />
     </section>
   );
 };

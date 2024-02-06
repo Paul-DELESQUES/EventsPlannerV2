@@ -1,6 +1,6 @@
 const AbstractManager = require("./AbstractManager");
 
-class EventManager extends AbstractManager {
+class TodolistManager extends AbstractManager {
   constructor() {
     super({ table: "todolist" });
   }
@@ -55,4 +55,4 @@ class EventManager extends AbstractManager {
   }
 }
 
-module.exports = EventManager;
+module.exports = TodolistManager;
