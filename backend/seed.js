@@ -47,6 +47,23 @@ const seed = async () => {
       )
     );
 
+    await database.query("delete from todolist");
+    queries.push(
+      database.query(
+        "insert into todolist (title, description, status) values ('Cérémonie laïque', 'Cérémonie laïque dans le jardin', 'todo')"
+      )
+    );
+    queries.push(
+      database.query(
+        "insert into todolist (title, description, status) values ('Cocktail', 'Cocktail dans la galerie des glaces', 'todo')"
+      )
+    );
+    queries.push(
+      database.query(
+        "insert into todolist (title, description, status) values ('Dîner', 'Dîner dans la galerie des batailles', 'todo')"
+      )
+    );
+
     /* ************************************************************************* */
 
     // Wait for all the insertion queries to complete
