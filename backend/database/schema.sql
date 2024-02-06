@@ -53,7 +53,7 @@ create table customers (
 
 create table calendar (
   id int auto_increment primary key,
-  event_id int unique,
+  event_id int not null,
   user_id int unique,
   title varchar(100),
   description text
@@ -64,5 +64,5 @@ create table todolist (
   user_id int unique,
   title varchar(100) not null,
   description text not null,
-  status enum('Liste', 'À faire', 'En cours', 'Terminé') not null
+  status enum('todo', 'in progress', 'completed') not null
 );
