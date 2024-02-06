@@ -11,7 +11,7 @@ function AddCustomerModal({ visible, onClose, eventId, onAdd }) {
     padding: "1rem",
     borderRadius: "1.5rem",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
-    width: "80%",
+    width: "50%",
     height: "80%",
   };
   const [prospectSource, setProspectSource] = useState("instagram");

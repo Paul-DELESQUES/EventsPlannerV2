@@ -1,0 +1,46 @@
+@import "variables";
+
+.customers-content {
+  width: 100%;
+  height: 100vh;
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7em;
+    margin: 0;
+    padding: 1rem 0;
+  }
+  .customer-btn {
+    position: relative;
+    left: 6rem;
+    top: 2rem;
+    width: 12.5rem;
+    height: 3rem;
+    border: 1px solid $clr-tertiary;
+    border-radius: 0.7rem;
+    color: $clr-tertiary;
+    font-size: 0.5em;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    &:hover {
+      background-color: $clr-tertiary;
+      color: $clr-white;
+    }
+  }
+  .table-container {
+    padding: 3rem 5rem;
+
+    .MuiTableRow-root,
+    .MuiTableCell-root {
+      // border: none !important;
+    }
+    .icons-edit-customers,
+    .icons-delete-customers {
+      margin-left: 0.8rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+  }
+}

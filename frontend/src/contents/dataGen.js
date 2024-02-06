@@ -1,38 +1,39 @@
-import iconsSidebar from "../assets";
-
-const EventsTempo = [
+const userData = [
   {
-    id: 1,
-    name: "Jane & John",
-    date: "26/08/2024",
-    img: iconsSidebar.logo,
-    eventType: "Mariage",
-    location: "Montpellier - Domaine des Rives",
+    firstName: "John",
+    lastName: "Doe",
+    address: "261 Erdman Ford",
+    city: "East Daphne",
+    state: "Kentucky",
   },
   {
-    id: 2,
-    name: "Jane & John",
-    date: "26/08/2024",
-    img: iconsSidebar.logo,
-    eventType: "Mariage",
-    location: "Montpellier - Domaine des Rives",
+    firstName: "Jane",
+    lastName: "Doe",
+    address: "769 Dominic Grove",
+    city: "Columbus",
+    state: "Ohio",
   },
   {
-    id: 3,
-    name: "Jane & John",
-    date: "26/08/2024",
-    img: iconsSidebar.logo,
-    eventType: "Mariage",
-    location: "Montpellier - Domaine des Rives",
+    firstName: "Joe",
+    lastName: "Doe",
+    address: "566 Brakus Inlet",
+    city: "South Linda",
+    state: "West Virginia",
   },
   {
-    id: 4,
-    name: "Jane & John",
-    date: "26/08/2024",
-    img: iconsSidebar.logo,
-    eventType: "Mariage",
-    location: "Montpellier - Domaine des Rives",
+    firstName: "Kevin",
+    lastName: "Vandy",
+    address: "722 Emie Stream",
+    city: "Lincoln",
+    state: "Nebraska",
+  },
+  {
+    firstName: "Joshua",
+    lastName: "Rolluffs",
+    address: "32188 Larkin Turnpike",
+    city: "Charleston",
+    state: "South Carolina",
   },
 ];
 
-export default EventsTempo;
+export default userData;
