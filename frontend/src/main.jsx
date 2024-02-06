@@ -8,7 +8,6 @@ import Calendar from "./pages/Calendar";
 import Customers from "./pages/Customers";
 import Error from "./pages/Error";
 import Events from "./pages/Events";
-import KanbanBoard from "./pages/KanbanBoard";
 
 const router = createBrowserRouter([
   {
@@ -27,10 +26,6 @@ const router = createBrowserRouter([
       {
         path: "agenda",
         element: <Calendar />,
-      },
-      {
-        path: "kanbanboard",
-        element: <KanbanBoard />,
       },
     ],
   },

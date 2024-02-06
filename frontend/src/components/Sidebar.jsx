@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
-import { HiOutlineClipboardList } from "react-icons/hi";
 import { IoCalendarNumber } from "react-icons/io5";
 import { MdEventNote } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -32,12 +31,6 @@ function Sidebar() {
       title: "Agenda",
       img: <IoCalendarNumber />,
       url: "agenda",
-    },
-    {
-      id: 4,
-      title: "Kanban Board",
-      img: <HiOutlineClipboardList />,
-      url: "kanbanboard",
     },
   ];
 
