@@ -43,7 +43,8 @@ class CustomerManager extends AbstractManager {
         address,
         zip_code,
         city,
-        country) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        country,
+        created_date) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())`,
       [
         eventId,
         prospectSource,
@@ -76,6 +77,17 @@ class CustomerManager extends AbstractManager {
     );
 
     return rows[0];
+  }
+
+  async readForCustomersList() {
+    const [rows] = await this.database.query(`select * from ${this.table}`);
+    return rows.map((customer) => ({
+      id: customer.id,
+      firstname: customer.firstname,
+      lastname: customer.lastname,
+      source: customer.prospect_source,
+      createdAt: customer.created_date,
+    }));
   }
 
   async readAll() {

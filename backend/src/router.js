@@ -15,6 +15,7 @@ router.delete("/eventspage/:id", eventControllers.destroy);
 
 router.get("/customers", customerControllers.browse);
 router.get("/customers/:id", customerControllers.read);
+router.get("/customerslist", customerControllers.readForCustomersList);
 router.get("/eventspage", customerControllers.readForEventPage);
 router.get("/calendar", customerControllers.readForCalendar);
 router.post("/customers", customerControllers.add);
