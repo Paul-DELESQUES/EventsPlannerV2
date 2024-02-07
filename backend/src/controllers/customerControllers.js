@@ -27,6 +27,21 @@ const read = async (req, res, next) => {
   }
 };
 
+const readForCustomersList = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const customer = await tables.customers.readForCustomersList(id);
+
+    if (customer == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(customer);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const readForCalendar = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -110,6 +125,7 @@ const destroy = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  readForCustomersList,
   readForEventPage,
   readForCalendar,
   edit,

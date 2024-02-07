@@ -48,7 +48,8 @@ create table customers (
   address varchar(255),
   zip_code varchar(5),
   city varchar(100),
-  country varchar(100)
+  country varchar(100),
+  created_date datetime
 );
 
 create table calendar (
