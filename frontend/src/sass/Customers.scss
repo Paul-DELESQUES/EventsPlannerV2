@@ -17,15 +17,16 @@
     top: 2rem;
     width: 12.5rem;
     height: 3rem;
-    border: 1px solid $clr-tertiary;
+    border: 1px solid $clr-quaternary;
     border-radius: 0.7rem;
-    color: $clr-tertiary;
+    color: $clr-quaternary;
     font-size: 0.5em;
     font-weight: 600;
     margin-bottom: 2rem;
+    box-shadow: $box-shadow;
     cursor: pointer;
     &:hover {
-      background-color: $clr-tertiary;
+      background-color: $clr-quaternary;
       color: $clr-white;
     }
   }
