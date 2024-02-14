@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -14,4 +16,5 @@ body {
   height: 100svh;
   font-size: 2rem;
   font-weight: 600;
+  font-family: "Public Sans", sans-serif;
 }

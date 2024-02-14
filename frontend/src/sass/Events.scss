@@ -18,15 +18,16 @@
     top: 2rem;
     width: 12.5rem;
     height: 3rem;
-    border: 1px solid $clr-tertiary;
+    border: 1px solid $clr-quaternary;
     border-radius: 0.7rem;
-    color: $clr-tertiary;
+    color: $clr-quaternary;
     font-size: 0.5em;
     font-weight: 600;
     margin-bottom: 2rem;
+    box-shadow: $box-shadow;
     cursor: pointer;
     &:hover {
-      background-color: $clr-tertiary;
+      background-color: $clr-quaternary;
       color: $clr-white;
     }
   }
@@ -41,20 +42,22 @@
 
     .event-card {
       position: relative;
+      background-color: $clr-white;
       width: 550px;
       height: 200px;
       display: flex;
       align-items: center;
-      border: 1px solid #ccc;
+      border: 1px solid $clr-quaternary;
       border-radius: 1.2rem;
       box-shadow:
-        $clr-tertiary 0px 20px 25px -5px,
-        $clr-tertiary 0px 10px 10px -5px;
+        $clr-quaternary 0px 10px 15px -5px,
+        $clr-quaternary 0px 10px 5px -5px;
 
       img {
         width: 100px;
         height: 100px;
         margin: 0 4rem 0 2rem;
+        border-radius: 50%;
       }
 
       .event-info {
