@@ -7,7 +7,7 @@ import AddCustomerForListModal from "../components/AddCustomerForListModal";
 import userData from "../contents/dataGen";
 import "../sass/Customers.scss";
 
-function Customers() {
+function Providers() {
   const [currentModal, setCurrentModal] = useState(null);
 
   const getCustomersForList = async () => {
@@ -96,4 +96,4 @@ function Customers() {
   );
 }
 
-export default Customers;
+export default Providers;
