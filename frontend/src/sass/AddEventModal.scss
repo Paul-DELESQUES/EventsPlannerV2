@@ -1,0 +1,89 @@
+@import "variables";
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 15% 15% 15% 55%;
+  gap: 2rem;
+  width: 100%;
+  color: $clr-white;
+  height: 90%;
+
+  .input-group {
+    margin-left: 1rem;
+    padding: 10px 10px;
+
+    .label {
+      font-weight: 500;
+      font-size: 1rem;
+      color: $clr-black;
+    }
+
+    .input {
+      color: $clr-black;
+      margin-top: 0.5rem;
+      background-color: $clr-quaternary;
+      outline: none;
+      border: 1px solid $clr-white;
+      font-size: 1rem;
+      font-weight: 300;
+      padding: 8px;
+      width: 100%;
+      resize: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .input-important {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+    width: 90%;
+
+    .label {
+      font-weight: 500;
+      font-size: 1rem;
+      color: $clr-black;
+    }
+
+    .input {
+      color: #626262;
+      margin-top: 0.5rem;
+      background-color: $clr-quaternary;
+      outline: none;
+      border: 1px solid $clr-white;
+      font-size: 1rem;
+      font-weight: 300;
+      padding: 10px;
+      width: 105%;
+      resize: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .saveButton {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    align-self: end;
+    justify-self: end;
+    margin-right: 3rem;
+    margin-bottom: 4rem;
+    width: 6rem;
+    background: $clr-secondary;
+    border: none;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .saveButton:disabled {
+    border: 1px solid $clr-secondary;
+    background: transparent;
+    color: $clr-secondary;
+  }
+}

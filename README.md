@@ -1,13 +1,6 @@
 ## Concept
 
-This template is meant to serve as a foundation for every P2/P3 following the React-Express-MySQL stack, as learned in Wild Code School.
-It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying a pedagogical tool.
-
-## Setup & Use
-
-### Windows users
-
-Be sure to run these commands in a git terminal to avoid [issues with newline formats](https://en.wikipedia.org/wiki/Newline#Issues_with_different_newline_formats):
+This template is created for a title project
 
 ### Project Initialization
 
@@ -24,8 +17,6 @@ Be sure to run these commands in a git terminal to avoid [issues with newline fo
 - `dev-front` : Starts the React frontend server
 - `dev-back` : Starts the Express backend server
 - `lint` : Runs validation tools (will be executed on every _commit_, and refuse unclean code)
-
-## FAQ
 
 ### Tools
 

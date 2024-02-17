@@ -1,0 +1,52 @@
+@import "./variables";
+
+.calendar-content {
+  width: 100%;
+  padding-top: 2rem;
+  .calendar-main {
+    margin: auto;
+    width: 90%;
+
+    h2 {
+      font-size: 2rem;
+    }
+    a {
+      font-size: 1.2rem;
+    }
+    .fc-event {
+      background-color: $clr-quaternary;
+      font-size: 1rem;
+    }
+    .fc-timegrid-slot {
+      height: 3.8rem;
+      font-size: 1rem;
+    }
+    .fc-daygrid-slot {
+      height: 3.5rem;
+    }
+    .fc {
+      height: 90vh;
+    }
+    .fc-col-header-cell-cushion {
+      display: flex;
+      justify-content: center;
+      font-size: 1.1rem;
+      align-items: center;
+    }
+
+    td {
+      height: 100%;
+      border: 1px solid $clr-grey;
+    }
+    .fc-button {
+      font-size: 0.9rem;
+      background-color: $clr-quaternary;
+    }
+    .fc-button:hover {
+      background: $clr-tertiary;
+    }
+    .fc-button:active {
+      background: $clr-tertiary;
+    }
+  }
+}
