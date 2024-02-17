@@ -37,7 +37,7 @@ function Sidebar() {
   return (
     <section className="sidebar">
       <div className="logo-ctn">
-        <img src={iconsSidebar.logo} alt="Logo" className="logo" />
+        <img src={iconsSidebar.logo2} alt="Logo" className="logo" />
       </div>
       <nav className="navbar">
         <ul className="nav-list">
@@ -60,7 +60,7 @@ function Sidebar() {
       <div className="profile-content">
         <div className="profile">
           <div className="profile-details">
-            <img src={iconsSidebar.logo} alt="Avatar" />
+            <img src={iconsSidebar.logo2} alt="Avatar" />
             <div className="name-job">
               <p className="name">John Wick</p>
               <p className="job"> Wedding Planner</p>

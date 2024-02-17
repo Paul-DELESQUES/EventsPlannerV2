@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import AddCustomerForListModal from "../components/AddCustomerForListModal";
 import userData from "../contents/dataGen";
-import "../sass/Customers.scss";
+import "../sass/Providers.scss";
 
 function Providers() {
   const [currentModal, setCurrentModal] = useState(null);
