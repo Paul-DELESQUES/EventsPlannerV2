@@ -5,7 +5,7 @@ import "../sass/Error.scss";
 function Error() {
   return (
     <div className="error">
-      <img src={iconsSidebar.logo} alt="logo" />
+      <img src={iconsSidebar.logo2} alt="logo" />
       <p>Oups ! Il semblerait que vous vous soyez perdus en chemin. </p>
       <Link to="/">
         <button type="button">
