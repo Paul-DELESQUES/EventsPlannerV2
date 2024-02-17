@@ -4,10 +4,12 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
+import Dashboard from "./layout/Dashboard";
 import Calendar from "./pages/Calendar";
-import Customers from "./pages/Customers";
 import Error from "./pages/Error";
 import Events from "./pages/Events";
+import LandingPage from "./pages/LandingPage";
+import Providers from "./pages/Providers";
 
 const router = createBrowserRouter([
   {
@@ -17,15 +19,25 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Events />,
+        element: <LandingPage />,
       },
       {
-        path: "clients",
-        element: <Customers />,
-      },
-      {
-        path: "agenda",
-        element: <Calendar />,
+        path: "/dashboard",
+        element: <Dashboard />,
+        children: [
+          {
+            path: "agenda",
+            element: <Calendar />,
+          },
+          {
+            path: "evenements",
+            element: <Events />,
+          },
+          {
+            path: "prestataires",
+            element: <Providers />,
+          },
+        ],
       },
     ],
   },

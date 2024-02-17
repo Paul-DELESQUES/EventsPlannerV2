@@ -3,6 +3,7 @@ import customers from "./customers.svg";
 import dashboard from "./dashboard.svg";
 import event from "./event.svg";
 import logo from "./logo.png";
+import logo2 from "./logo.svg";
 import menu from "./menu.svg";
 import setting from "./setting.svg";
 import tasksBoard from "./tasksBoard.svg";
@@ -13,6 +14,7 @@ const iconsSidebar = {
   dashboard,
   event,
   logo,
+  logo2,
   menu,
   setting,
   tasksBoard,

@@ -16,21 +16,21 @@ function Sidebar() {
   const navLinks = [
     {
       id: 1,
-      title: "Evénements",
-      img: <MdEventNote />,
-      url: "/",
-    },
-    {
-      id: 2,
-      title: "Clients",
-      img: <AiOutlineUser />,
-      url: "clients",
-    },
-    {
-      id: 3,
       title: "Agenda",
       img: <IoCalendarNumber />,
       url: "agenda",
+    },
+    {
+      id: 2,
+      title: "Evénements",
+      img: <MdEventNote />,
+      url: "evenements",
+    },
+    {
+      id: 3,
+      title: "Prestataires",
+      img: <AiOutlineUser />,
+      url: "prestataires",
     },
   ];
 
@@ -62,7 +62,7 @@ function Sidebar() {
           <div className="profile-details">
             <img src={iconsSidebar.logo} alt="Avatar" />
             <div className="name-job">
-              <p className="name">Sacha DELESQUES</p>
+              <p className="name">John Wick</p>
               <p className="job"> Wedding Planner</p>
             </div>
           </div>
