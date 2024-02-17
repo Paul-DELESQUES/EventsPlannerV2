@@ -101,7 +101,7 @@ function Events() {
         {events.map((event) => {
           return (
             <div className="event-card" key={event.id}>
-              <img src={iconsSidebar.logo} alt="Avatar" />
+              <img src={iconsSidebar.logo2} alt="Avatar" />
               <div className="event-info">
                 <h4>{event.customerName.join(" & ")}</h4>
                 <p>{event.eventDateStart}</p>

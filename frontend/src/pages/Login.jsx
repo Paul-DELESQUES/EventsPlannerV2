@@ -12,7 +12,7 @@ function Login() {
 
     setTimeout(() => {
       navigate("/dashboard");
-    }, 1000);
+    }, 500);
   };
 
   //   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {
