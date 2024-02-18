@@ -28,19 +28,27 @@ function Providers() {
   const columns = useMemo(() => [
     {
       accessorKey: "firstName",
-      header: "First Name",
+      header: "Prénom",
     },
     {
-      accessorKey: "lastName",
-      header: "Last Name",
+      accessorKey: "type",
+      header: "Type",
+    },
+    {
+      accessorKey: "email",
+      header: "Email",
+    },
+    {
+      accessorKey: "phone",
+      header: "Téléphone",
     },
     {
       accessorKey: "address",
-      header: "Address",
+      header: "Adresse",
     },
     {
       accessorKey: "city",
-      header: "City",
+      header: "Ville",
     },
     {
       accessorKey: "actions",
@@ -76,13 +84,13 @@ function Providers() {
 
   return (
     <section className="customers-content">
-      <h2>Clients</h2>
+      <h2>Prestataires</h2>
       <button
         type="button"
         className="customer-btn"
         onClick={() => handleAddCustomers()}
       >
-        Ajouter un client
+        Ajouter un prestataire
       </button>
       {currentModal === "add-customer" && (
         <AddCustomerForListModal visible onClose={handleModalClose} />
