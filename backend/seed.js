@@ -47,20 +47,20 @@ const seed = async () => {
       )
     );
 
-    await database.query("delete from todolist");
+    await database.query("delete from providers");
     queries.push(
       database.query(
-        "insert into todolist (title, description, status) values ('Cérémonie laïque', 'Cérémonie laïque dans le jardin', 'todo')"
+        "insert into providers (civility, name, lastname, firstname, provider_type, email, phone, address, zip_code, city, country) values ('mr', 'la bonne fourchette', 'Jean', 'Jean', 'caterer', 'test@mail.com', '0600000000', '1 rue de la paix', '75000', 'Paris', 'France')"
       )
     );
     queries.push(
       database.query(
-        "insert into todolist (title, description, status) values ('Cocktail', 'Cocktail dans la galerie des glaces', 'todo')"
+        "insert into providers (civility, name, lastname, firstname, provider_type, email, phone, address, zip_code, city, country) values ('mr', 'la belle rise', 'Jean', 'Jean', 'fleuriste', 'test2@mail.com', '0600000000', '1 rue de la paix', '75000', 'Paris', 'France')"
       )
     );
     queries.push(
       database.query(
-        "insert into todolist (title, description, status) values ('Dîner', 'Dîner dans la galerie des batailles', 'todo')"
+        "insert into providers (civility, name, lastname, firstname, provider_type, email, phone, address, zip_code, city, country) values ('mr', 'DJ', 'Jean', 'Jean', 'DJ sound', 'test3@mail.com', '0600000000', '1 rue de la paix', '75000', 'Paris', 'France')"
       )
     );
 

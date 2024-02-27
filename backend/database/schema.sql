@@ -4,6 +4,7 @@ drop table if exists events;
 drop table if exists todolist;
 drop table if exists types;
 drop table if exists users;
+drop table if exists providers;
 
 create table users (
   id int auto_increment primary key,
@@ -52,18 +53,27 @@ create table customers (
   created_date datetime
 );
 
+create table providers (
+  id int auto_increment primary key,
+  user_id int unique,
+  civility enum('mr', 'mrs') not null,
+  name varchar(100) not null,
+  lastname varchar(80) not null,
+  firstname varchar(80) not null,
+  provider_type varchar(100),
+  email varchar(100) not null,
+  phone varchar(15) not null,
+  address varchar(255),
+  zip_code varchar(5),
+  city varchar(100),
+  country varchar(100),
+  created_date datetime
+);
+
 create table calendar (
   id int auto_increment primary key,
   event_id int not null,
   user_id int unique,
   title varchar(100),
   description text
-);
-
-create table todolist (
-  id int auto_increment primary key,
-  user_id int unique,
-  title varchar(100) not null,
-  description text not null,
-  status enum('todo', 'in progress', 'completed') not null
 );
