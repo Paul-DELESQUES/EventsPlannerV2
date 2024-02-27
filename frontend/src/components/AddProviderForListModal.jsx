@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import "../sass/AddCustomerModal.scss";
+import "../sass/AddProviderModal.scss";
 
-function AddCustomerForListModal({ visible, onClose }) {
+function AddProviderForListModal({ visible, onClose }) {
   const customStyles = {
     background: "rgb(246, 240, 240)",
     padding: "1rem",
@@ -14,35 +14,27 @@ function AddCustomerForListModal({ visible, onClose }) {
     width: "50%",
     height: "80%",
   };
-  const [prospectSource, setProspectSource] = useState("instagram");
-  const [customerType, setCustomerType] = useState("single");
   const [civility, setCivility] = useState("mr");
-  const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [name, setName] = useState("");
+  const [typeProvider, setTypeProvider] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [job, setJob] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [placeOfBirth, setPlaceOfBirth] = useState("");
-  const [nationality, setNationality] = useState("");
   const [address, setAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
 
   const handleSubmitCustomer = async () => {
-    const customer = {
-      prospectSource,
-      customerType,
+    const provider = {
       civility,
+      name,
       lastname,
       firstname,
+      typeProvider,
       email,
       phone,
-      job,
-      dateOfBirth,
-      placeOfBirth,
-      nationality,
       address,
       zipCode,
       city,
@@ -50,29 +42,12 @@ function AddCustomerForListModal({ visible, onClose }) {
     };
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/customerslist`,
-        customer
+        `${import.meta.env.VITE_BACKEND_URL}/api/providerslist`,
+        provider
       );
       console.info("Success:", response);
-      if (response.data.isNbCustomersFine) {
+      if (response.data) {
         onClose();
-      } else {
-        alert("Please add another customer");
-        setProspectSource("");
-        setCustomerType("");
-        setCivility("");
-        setLastname("");
-        setFirstname("");
-        setEmail("");
-        setPhone("");
-        setJob("");
-        setDateOfBirth("");
-        setPlaceOfBirth("");
-        setNationality("");
-        setAddress("");
-        setZipCode("");
-        setCity("");
-        setCountry("");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -81,36 +56,8 @@ function AddCustomerForListModal({ visible, onClose }) {
 
   return (
     <Rodal visible={visible} onClose={onClose} customStyles={customStyles}>
-      <div className="container-customers">
-        <div className="info-customers">
-          <div className="input-info">
-            <span className="label">Source du prospect</span>
-            <select
-              value={prospectSource}
-              onChange={(e) => setProspectSource(e.target.value)}
-              className="input"
-            >
-              <option value="word_of_mouth">Bouche à oreille</option>
-              <option value="instagram">Instagram</option>
-              <option value="facebook">Facebook</option>
-              <option value="mariage.net">Mariage.net</option>
-              <option value="linkedin">linkedin</option>
-            </select>
-          </div>
-          <div className="input-info">
-            <span className="label">Type clients</span>
-            <select
-              value={customerType}
-              onChange={(e) => setCustomerType(e.target.value)}
-              className="input"
-            >
-              <option value="single">Célibataire</option>
-              <option value="couple">Couple</option>
-              <option value="professional">Professionnel</option>
-            </select>
-          </div>
-        </div>
-        <div className="customer-left">
+      <div className="container-providers">
+        <div className="provider-left">
           <div className="input-group">
             <span className="label">Civilité</span>
             <select
@@ -141,6 +88,24 @@ function AddCustomerForListModal({ visible, onClose }) {
             />
           </div>
           <div className="input-group">
+            <span className="label">Nom entreprise</span>
+            <input
+              type="text"
+              className="input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <span className="label">Type prestataire</span>
+            <input
+              type="text"
+              className="input"
+              value={typeProvider}
+              onChange={(e) => setTypeProvider(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
             <span className="label">E-mail</span>
             <input
               type="text"
@@ -156,42 +121,6 @@ function AddCustomerForListModal({ visible, onClose }) {
               className="input"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-          <div className="input-group">
-            <span className="label">Profession</span>
-            <input
-              type="text"
-              className="input"
-              value={job}
-              onChange={(e) => setJob(e.target.value)}
-            />
-          </div>
-          <div className="input-group">
-            <span className="label">Date de naissance</span>
-            <input
-              className="input"
-              value={dateOfBirth}
-              type="date"
-              onChange={(e) => setDateOfBirth(e.target.value)}
-            />
-          </div>
-          <div className="input-group">
-            <span className="label">Lieu de naissance</span>
-            <input
-              className="input"
-              value={placeOfBirth}
-              type="text"
-              onChange={(e) => setPlaceOfBirth(e.target.value)}
-            />
-          </div>
-          <div className="input-group">
-            <span className="label">Nationalité</span>
-            <input
-              className="input"
-              value={nationality}
-              type="text"
-              onChange={(e) => setNationality(e.target.value)}
             />
           </div>
           <div className="input-address">
@@ -234,23 +163,17 @@ function AddCustomerForListModal({ visible, onClose }) {
         <button
           type="button"
           disabled={
-            prospectSource === "" ||
-            customerType === "" ||
             civility === "" ||
             firstname === "" ||
             lastname === "" ||
             email === "" ||
             phone === "" ||
-            job === "" ||
-            dateOfBirth === "" ||
-            placeOfBirth === "" ||
-            nationality === "" ||
             address === "" ||
             zipCode === "" ||
             city === "" ||
             country === ""
           }
-          className="saveButton-customers"
+          className="saveButton-providers"
           onClick={() => {
             handleSubmitCustomer();
           }}
@@ -262,10 +185,10 @@ function AddCustomerForListModal({ visible, onClose }) {
   );
 }
 
-AddCustomerForListModal.propTypes = {
+AddProviderForListModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 };
 
-export default AddCustomerForListModal;
+export default AddProviderForListModal;

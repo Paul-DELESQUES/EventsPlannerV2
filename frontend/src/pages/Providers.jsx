@@ -3,9 +3,8 @@ import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
 import { useEffect, useMemo, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import AddCustomerForListModal from "../components/AddCustomerForListModal";
+import AddProviderForListModal from "../components/AddProviderForListModal";
 import "../sass/Providers.scss";
-
 function Providers() {
   const [currentModal, setCurrentModal] = useState(null);
   const [providersData, setProvidersData] = useState([]);
@@ -57,11 +56,11 @@ function Providers() {
         <div>
           <FaEdit
             onClick={() => handleEdit(row.original)}
-            className="icons-edit-customers"
+            className="icons-edit-providers"
           />
           <FaTrash
             onClick={() => handleDelete(row.original)}
-            className="icons-delete-customers"
+            className="icons-delete-providers"
           />
         </div>
       ),
@@ -75,25 +74,25 @@ function Providers() {
     })
   );
 
-  const handleAddCustomers = () => {
-    setCurrentModal("add-customer");
+  const handleModalOpen = () => {
+    setCurrentModal("provider");
   };
   const handleModalClose = () => {
     setCurrentModal(null);
   };
 
   return (
-    <section className="customers-content">
+    <section className="providers-content">
       <h2>Prestataires</h2>
       <button
         type="button"
-        className="customer-btn"
-        onClick={() => handleAddCustomers()}
+        className="provider-btn"
+        onClick={() => handleModalOpen()}
       >
         Ajouter un prestataire
       </button>
-      {currentModal === "add-customer" && (
-        <AddCustomerForListModal visible onClose={handleModalClose} />
+      {currentModal === "provider" && (
+        <AddProviderForListModal visible onClose={handleModalClose} />
       )}
       <div className="table-container">
         <ThemeProvider theme={theme}>
