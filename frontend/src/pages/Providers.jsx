@@ -4,34 +4,34 @@ import { MaterialReactTable } from "material-react-table";
 import { useEffect, useMemo, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import AddCustomerForListModal from "../components/AddCustomerForListModal";
-import userData from "../contents/dataGen";
 import "../sass/Providers.scss";
 
 function Providers() {
   const [currentModal, setCurrentModal] = useState(null);
+  const [providersData, setProvidersData] = useState([]);
 
-  const getCustomersForList = async () => {
+  const getProvidersForList = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/customerslist`
+        `${import.meta.env.VITE_BACKEND_URL}/api/providers`
       );
-      console.info("Success:", data);
+      setProvidersData(data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   useEffect(() => {
-    getCustomersForList();
+    getProvidersForList();
   }, []);
 
   const columns = useMemo(() => [
     {
-      accessorKey: "firstName",
-      header: "Prénom",
+      accessorKey: "name",
+      header: "Nom",
     },
     {
-      accessorKey: "type",
+      accessorKey: "provider_type",
       header: "Type",
     },
     {
@@ -97,7 +97,7 @@ function Providers() {
       )}
       <div className="table-container">
         <ThemeProvider theme={theme}>
-          <MaterialReactTable columns={columns} data={userData} />
+          <MaterialReactTable columns={columns} data={providersData} />
         </ThemeProvider>
       </div>
     </section>
