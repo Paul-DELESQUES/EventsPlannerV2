@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import iconsSidebar from "../assets";
+import iconsSidebar from "../../assets";
 
 function Navbar() {
   return (

@@ -11,7 +11,7 @@ function Login() {
     event.preventDefault();
 
     setTimeout(() => {
-      navigate("/dashboard");
+      navigate("/dashboard/agenda");
     }, 500);
   };
 
