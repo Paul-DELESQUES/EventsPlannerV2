@@ -50,7 +50,7 @@ const edit = async (req, res, next) => {
 const add = async (req, res, next) => {
   try {
     const providerId = await tables.providers.create(req.body);
-    res.json({ id: providerId, isEventComplete });
+    res.json(providerId);
   } catch (err) {
     next(err);
   }

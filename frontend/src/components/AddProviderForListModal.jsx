@@ -5,7 +5,7 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import "../sass/AddProviderModal.scss";
 
-function AddProviderForListModal({ visible, onClose }) {
+function AddProviderForListModal({ visible, onClose, onAdd }) {
   const customStyles = {
     background: "rgb(246, 240, 240)",
     padding: "1rem",
@@ -18,7 +18,7 @@ function AddProviderForListModal({ visible, onClose }) {
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [name, setName] = useState("");
-  const [typeProvider, setTypeProvider] = useState("");
+  const [providerType, setProviderType] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -26,13 +26,13 @@ function AddProviderForListModal({ visible, onClose }) {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
 
-  const handleSubmitCustomer = async () => {
+  const handleSubmitProvider = async () => {
     const provider = {
       civility,
-      name,
       lastname,
       firstname,
-      typeProvider,
+      name,
+      providerType,
       email,
       phone,
       address,
@@ -42,13 +42,12 @@ function AddProviderForListModal({ visible, onClose }) {
     };
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/providerslist`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/providers`,
         provider
       );
       console.info("Success:", response);
-      if (response.data) {
-        onClose();
-      }
+      onClose(response.data);
+      onAdd();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -101,8 +100,8 @@ function AddProviderForListModal({ visible, onClose }) {
             <input
               type="text"
               className="input"
-              value={typeProvider}
-              onChange={(e) => setTypeProvider(e.target.value)}
+              value={providerType}
+              onChange={(e) => setProviderType(e.target.value)}
             />
           </div>
           <div className="input-group">
@@ -175,7 +174,7 @@ function AddProviderForListModal({ visible, onClose }) {
           }
           className="saveButton-providers"
           onClick={() => {
-            handleSubmitCustomer();
+            handleSubmitProvider();
           }}
         >
           Valider

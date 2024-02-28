@@ -24,6 +24,17 @@ function Providers() {
     getProvidersForList();
   }, []);
 
+  const handleDeleteProvider = async (id) => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/providers/${id}`
+      );
+      getProvidersForList();
+    } catch (error) {
+      console.error("Failed to delete provider", error);
+    }
+  };
+
   const columns = useMemo(() => [
     {
       accessorKey: "name",
@@ -59,7 +70,7 @@ function Providers() {
             className="icons-edit-providers"
           />
           <FaTrash
-            onClick={() => handleDelete(row.original)}
+            onClick={() => handleDeleteProvider(row.original.id)}
             className="icons-delete-providers"
           />
         </div>
@@ -92,7 +103,11 @@ function Providers() {
         Ajouter un prestataire
       </button>
       {currentModal === "provider" && (
-        <AddProviderForListModal visible onClose={handleModalClose} />
+        <AddProviderForListModal
+          visible
+          onClose={handleModalClose}
+          onAdd={getProvidersForList}
+        />
       )}
       <div className="table-container">
         <ThemeProvider theme={theme}>
