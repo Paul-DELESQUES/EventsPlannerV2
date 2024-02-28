@@ -3,44 +3,62 @@ import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
 import { useEffect, useMemo, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import AddCustomerForListModal from "../components/AddCustomerForListModal";
-import userData from "../contents/dataGen";
-import "../sass/Customers.scss";
-
+import AddProviderForListModal from "../components/AddProviderForListModal";
+import "../sass/Providers.scss";
 function Providers() {
   const [currentModal, setCurrentModal] = useState(null);
+  const [providersData, setProvidersData] = useState([]);
 
-  const getCustomersForList = async () => {
+  const getProvidersForList = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/customerslist`
+        `${import.meta.env.VITE_BACKEND_URL}/api/providers`
       );
-      console.info("Success:", data);
+      setProvidersData(data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   useEffect(() => {
-    getCustomersForList();
+    getProvidersForList();
   }, []);
+
+  const handleDeleteProvider = async (id) => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/providers/${id}`
+      );
+      getProvidersForList();
+    } catch (error) {
+      console.error("Failed to delete provider", error);
+    }
+  };
 
   const columns = useMemo(() => [
     {
-      accessorKey: "firstName",
-      header: "First Name",
+      accessorKey: "name",
+      header: "Nom",
     },
     {
-      accessorKey: "lastName",
-      header: "Last Name",
+      accessorKey: "provider_type",
+      header: "Type",
+    },
+    {
+      accessorKey: "email",
+      header: "Email",
+    },
+    {
+      accessorKey: "phone",
+      header: "Téléphone",
     },
     {
       accessorKey: "address",
-      header: "Address",
+      header: "Adresse",
     },
     {
       accessorKey: "city",
-      header: "City",
+      header: "Ville",
     },
     {
       accessorKey: "actions",
@@ -49,11 +67,11 @@ function Providers() {
         <div>
           <FaEdit
             onClick={() => handleEdit(row.original)}
-            className="icons-edit-customers"
+            className="icons-edit-providers"
           />
           <FaTrash
-            onClick={() => handleDelete(row.original)}
-            className="icons-delete-customers"
+            onClick={() => handleDeleteProvider(row.original.id)}
+            className="icons-delete-providers"
           />
         </div>
       ),
@@ -67,29 +85,33 @@ function Providers() {
     })
   );
 
-  const handleAddCustomers = () => {
-    setCurrentModal("add-customer");
+  const handleModalOpen = () => {
+    setCurrentModal("provider");
   };
   const handleModalClose = () => {
     setCurrentModal(null);
   };
 
   return (
-    <section className="customers-content">
-      <h2>Clients</h2>
+    <section className="providers-content">
+      <h2>Prestataires</h2>
       <button
         type="button"
-        className="customer-btn"
-        onClick={() => handleAddCustomers()}
+        className="provider-btn"
+        onClick={() => handleModalOpen()}
       >
-        Ajouter un client
+        Ajouter un prestataire
       </button>
-      {currentModal === "add-customer" && (
-        <AddCustomerForListModal visible onClose={handleModalClose} />
+      {currentModal === "provider" && (
+        <AddProviderForListModal
+          visible
+          onClose={handleModalClose}
+          onAdd={getProvidersForList}
+        />
       )}
       <div className="table-container">
         <ThemeProvider theme={theme}>
-          <MaterialReactTable columns={columns} data={userData} />
+          <MaterialReactTable columns={columns} data={providersData} />
         </ThemeProvider>
       </div>
     </section>

@@ -1,50 +1,13 @@
 @import "variables";
-.container-customers {
+.container-providers {
   display: grid;
-  grid-template-rows: 17% 78% 5%;
+  grid-template-rows: 100% 10%;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin: 20px 20px;
 
-  .info-customers {
+  .provider-left {
     grid-row: 1;
-    grid-column: span 2;
-    border: 1px solid #000;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 10rem;
-    .input-info {
-      display: flex;
-      flex-direction: column;
-      margin-left: 1rem;
-
-      .label {
-        font-weight: bold;
-        font-size: 0.8rem;
-        color: #626262;
-        margin-bottom: 0.5rem;
-      }
-
-      .input {
-        color: #626262;
-        margin-top: 0.5rem;
-        background-color: $clr-quaternary;
-        outline: none;
-        border: 1px solid $clr-white;
-        font-size: 1rem;
-        font-weight: 300;
-        padding: 10px;
-        width: 150%;
-        border-radius: 8px;
-        resize: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-      }
-    }
-  }
-
-  .customer-left {
-    grid-row: 2;
     grid-column: span 2;
     border: 1px solid #000;
     border-radius: 1rem;
@@ -108,7 +71,7 @@
     }
   }
 
-  .saveButton-customers {
+  .saveButton-providers {
     grid-column-start: 2;
     align-self: center;
     justify-self: end;
@@ -124,7 +87,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
 
-  .saveButton-customers:disabled {
+  .saveButton-providers:disabled {
     border: 1px solid $clr-secondary;
     background: transparent;
     color: $clr-secondary;

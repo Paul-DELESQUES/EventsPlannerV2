@@ -17,6 +17,7 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
+      border: 1.5px solid $clr-text;
     }
   }
   .navbar {
@@ -110,6 +111,7 @@
         left: 80%;
         bottom: 25px;
         font-size: 2rem;
+        color: $clr-text;
         cursor: pointer;
       }
     }

@@ -9,7 +9,9 @@ import Calendar from "./pages/Calendar";
 import Error from "./pages/Error";
 import Events from "./pages/Events";
 import LandingPage from "./pages/LandingPage";
+import Login from "./pages/Login";
 import Providers from "./pages/Providers";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/connexion",
+        element: <Login />,
+      },
+      {
+        path: "/inscription",
+        element: <Register />,
       },
       {
         path: "/dashboard",
