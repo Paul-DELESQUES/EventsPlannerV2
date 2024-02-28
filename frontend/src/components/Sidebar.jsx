@@ -66,7 +66,9 @@ function Sidebar() {
               <p className="job"> Wedding Planner</p>
             </div>
           </div>
-          <BiLogOut className="logout-icon" />
+          <Link to="/">
+            <BiLogOut className="logout-icon" />
+          </Link>
         </div>
       </div>
     </section>
