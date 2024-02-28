@@ -9,9 +9,9 @@ class ProviderManager extends AbstractManager {
 
   async create({
     civility,
-    name,
     lastname,
     firstname,
+    name,
     providerType,
     email,
     phone,
