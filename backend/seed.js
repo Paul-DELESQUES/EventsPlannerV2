@@ -50,12 +50,12 @@ const seed = async () => {
     await database.query("delete from providers");
     queries.push(
       database.query(
-        "insert into providers (civility, name, lastname, firstname, provider_type, email, phone, address, zip_code, city, country) values ('mr', 'la bonne fourchette', 'Jean', 'Jean', 'caterer', 'test@mail.com', '0600000000', '1 rue de la paix', '75000', 'Paris', 'France')"
+        "insert into providers (civility, name, lastname, firstname, provider_type, email, phone, address, zip_code, city, country) values ('mr', 'la bonne fourchette', 'Jean', 'Jean', 'traiteur', 'test@mail.com', '0600000000', '1 rue de la paix', '75000', 'Paris', 'France')"
       )
     );
     queries.push(
       database.query(
-        "insert into providers (civility, name, lastname, firstname, provider_type, email, phone, address, zip_code, city, country) values ('mr', 'la belle rise', 'Jean', 'Jean', 'fleuriste', 'test2@mail.com', '0600000000', '1 rue de la paix', '75000', 'Paris', 'France')"
+        "insert into providers (civility, name, lastname, firstname, provider_type, email, phone, address, zip_code, city, country) values ('mr', 'la belle rose', 'Jean', 'Jean', 'fleuriste', 'test2@mail.com', '0600000000', '1 rue de la paix', '75000', 'Paris', 'France')"
       )
     );
     queries.push(
