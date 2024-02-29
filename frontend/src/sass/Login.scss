@@ -1,110 +1,212 @@
 @import "variables.scss";
+.login {
+  min-height: 100vh;
+  text-align: center;
+  color: $clr-white;
+  padding: 0 1rem 1rem 1rem;
 
-.structureConnexionContainer {
   display: flex;
-  width: 100%;
-  height: 100vh;
+  flex-direction: column;
+  align-items: center;
 
-  .leftContainer {
-    flex: 40%;
-    padding: 5vh 5vw;
+  &.connexion {
+    background: $clr-white;
+    color: $clr-text;
+
+    .button-bas {
+      background: $clr-quaternary;
+      .butt {
+        font-size: 1.8rem;
+        font-weight: 500;
+      }
+    }
+
+    .login-register {
+      position: absolute;
+      right: 1rem;
+      top: 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border: 2px $clr-secondary solid;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+    }
   }
 
-  .titleStructureConnexion {
-    display: flex;
-    color: $clr-quaternary;
-    margin-bottom: 3vh;
-  }
-
-  .pro {
-    display: flex;
-    align-items: center;
-    border: 2px solid $clr-quaternary;
-    border-radius: 100px;
-    margin: 1.4vw 1vw;
-    height: 3vh;
-  }
-
-  .subtitleStructureConnexion {
-    color: $clr-white;
-    background-color: $clr-quaternary;
-    width: 15vw;
-    font-size: calc(15px + 0.6vw);
-    padding-inline: 5px;
-    padding: 0.1rem 0.5rem;
-    margin-bottom: 1vh;
-  }
-
-  .dhConnexion {
-    color: $clr-quaternary;
-    font-size: calc(15px + 0.5vw);
-    font-weight: bold;
-  }
-
-  .imgConnexionStructure {
-    margin-top: 30vh;
-    width: 90%;
-  }
-
-  .rightContainer {
-    flex: 60%;
+  main {
+    width: 100%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+
+    img {
+      width: calc(100vw - 4rem);
+      max-width: 330px;
+      margin-top: 30px;
+    }
+
+    img.mini-logo {
+      max-height: 50px;
+    }
+
+    &.page1 img:nth-child(1) {
+      margin-top: -10px;
+    }
+
+    &.page1 img:nth-child(2) {
+      margin-top: -60px;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 2rem;
+    }
+
+    .sub-title {
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
+
+    .trouve {
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 5rem 0 1rem;
+
+      & + p {
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    width: 90%;
+    flex-grow: 1;
+
+    label:not(.check):not(.toggle) {
+      position: relative;
+      width: 100%;
+
+      input {
+        color: transparent;
+      }
+      input:focus,
+      input:valid {
+        color: $clr-text;
+      }
+
+      input {
+        border: 3px solid $clr-text;
+        background-color: transparent;
+        border-radius: 10px;
+        padding: 0.5rem;
+        width: 100%;
+        height: 50px;
+        /* enleve la border de base */
+        outline: none;
+
+        &:focus {
+          border-color: $clr-quaternary;
+
+          & + p {
+            transform: translate(5px, -9px);
+            font-size: 13px;
+            padding: 0 5px;
+            color: $clr-quaternary;
+            border-right: 3px solid $clr-quaternary;
+            border-left: 3px solid $clr-quaternary;
+            border-radius: 5px;
+            line-height: 20px;
+            background-color: $clr-white;
+          }
+        }
+
+        &:valid {
+          border-color: $clr-green;
+
+          & + p {
+            transform: translate(5px, -9px);
+            font-size: 13px;
+            padding: 0 5px;
+            color: $clr-green;
+            border-right: 3px solid $clr-green;
+            border-left: 3px solid $clr-green;
+            border-radius: 5px;
+            line-height: 20px;
+            background-color: $clr-white;
+            transition: 0s;
+          }
+        }
+
+        &[type="number"]::-webkit-inner-spin-button,
+        &[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+
+      p {
+        position: absolute;
+        left: 10px;
+        top: -10px;
+        line-height: 50px;
+        transition: 0.3s;
+      }
+
+      .view-password {
+        position: absolute;
+        right: 10px;
+        top: 0.8rem;
+        background-color: transparent;
+        border: none;
+        font-size: 1.5rem;
+        color: $clr-secondary;
+        cursor: pointer;
+      }
+    }
+  }
+  .button-bas {
+    display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $clr-quaternary;
-    padding: 20px;
+    color: $clr-white;
+    width: 90%;
+    height: 70px;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
 
-    .spaceConnexion {
-      width: 50%;
-      margin-bottom: 3vh;
+    .grad {
+      width: 100%;
+      height: 100%;
+    }
+
+    .butt {
       display: flex;
-      align-items: flex-start;
-    }
-
-    .inputConnexion {
-      width: 50%;
-      margin-bottom: 1vh;
-      padding: 1vh 1vw;
-    }
-
-    .checkboxCGU {
-      width: 50%;
-      margin-bottom: 2vh;
-      a {
-        color: $clr-white;
-      }
-    }
-    .linksConnexion {
-      margin-top: 0.5vh;
-      display: flex;
-      width: 50%;
-      justify-content: space-between;
-    }
-    .forgetPwdLink {
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-radius: 1rem;
+      background-color: transparent;
+      padding: 0.2rem;
+      font-weight: 500;
+      font-size: 1rem;
+      height: 70px;
       color: $clr-white;
-      margin-right: 2vw;
-    }
-
-    .inscriptionLink {
-      color: $clr-white;
-    }
-
-    .structureConnexionBtn {
-      width: 50%;
-      text-transform: uppercase;
-      color: $clr-white;
-      background-color: $clr-grey;
-      padding: 1vh 1vw;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: 0.3s ease-in-out;
       cursor: pointer;
-      &:hover {
-        background-color: $clr-test2;
-        border: 1px solid $clr-text;
-      }
     }
   }
 }
