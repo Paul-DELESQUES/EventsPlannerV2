@@ -1,18 +1,18 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import "../sass/Login.scss";
 
 function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [typePwd, setTypePwd] = useState(true);
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     setTimeout(() => {
       navigate("/dashboard/agenda");
-    }, 500);
+    }, 1000);
   };
 
   //   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {
@@ -54,57 +54,61 @@ function Login() {
   // };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="structureConnexionContainer">
-        <div className="leftContainer">
-          <div className="titleStructureConnexion">
-            <h1>Events Planner</h1>
-            <span className="pro">PRO</span>
-          </div>
-          <p className="subtitleStructureConnexion">
-            Gérez votre agenda professionnel
-          </p>
-          <p className="dhConnexion">24h/24 et 7j/7</p>
-          {/* <img
-            className="imgConnexionStructure"
-            // src={connexion}
-            alt="connexion"
-          /> */}
-        </div>
-        <div className="rightContainer">
-          <h3 className="spaceConnexion"> Connexion à mon espace </h3>
-          <input
-            className="inputConnexion"
-            type="email"
-            autoComplete="on"
-            placeholder="Email"
-            ref={emailRef}
-          />
-          <input
-            className="inputConnexion"
-            type="password"
-            autoComplete="on"
-            placeholder="Mot de passe"
-            ref={passwordRef}
-          />
-          <label className="checkboxCGU">
-            <input type="checkbox" /> J'accepte les{" "}
-            <a href="/Error">conditions générales d'utilisation.</a>
+    <div className="login connexion">
+      <main>
+        <Link to="/inscription">
+          <button type="button" className="login-register">
+            S'inscrire
+          </button>
+        </Link>
+        <h3>Se connecter</h3>
+
+        <form>
+          <label htmlFor="email">
+            <input
+              required
+              type="email"
+              name="email"
+              value={email}
+              id="email"
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+            <p>E mail</p>
           </label>
-          <button className="structureConnexionBtn" type="submit">
+          <label htmlFor="mdp">
+            <input
+              required
+              type={typePwd ? "password" : "text"}
+              name="mdp"
+              value={password}
+              id="mdp"
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+            <p>Mot de passe</p>
+            <button
+              type="button"
+              className="view-password"
+              onClick={() => setTypePwd(!typePwd)}
+            >
+              {typePwd ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </button>
+          </label>
+        </form>
+        <div className="button-bas">
+          <button
+            className="butt grad"
+            type="submit"
+            onClick={() => handleSubmit()}
+          >
             Se connecter
           </button>
-          <div className="linksConnexion">
-            <a className="forgetPwdLink" href="/Error">
-              Mot de passe oublié ?
-            </a>
-            <a className="inscriptionLink" href="/inscription">
-              S'inscrire
-            </a>
-          </div>
         </div>
-      </div>
-    </form>
+      </main>
+    </div>
   );
 }
 
