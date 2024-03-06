@@ -1,5 +1,4 @@
 const argon2 = require("argon2");
-const jwt = require("jsonwebtoken");
 
 const hashPassword = async (req, res, next) => {
   try {

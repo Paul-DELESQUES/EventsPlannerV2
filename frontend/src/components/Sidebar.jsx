@@ -6,10 +6,17 @@ import { IoCalendarNumber } from "react-icons/io5";
 import { MdEventNote } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import iconsSidebar from "../assets";
+import { useAuth } from "../context/AuthContext";
 import "../sass/Sidebar.scss";
 
 function Sidebar() {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const { user } = useAuth();
+  const nameUser =
+    user && user.firstname && user.lastname
+      ? `${user.firstname} ${user.lastname}`
+      : "NULL";
+
   const navigate = useNavigate();
 
   const handleClickLink = (index) => {
@@ -75,7 +82,7 @@ function Sidebar() {
           <div className="profile-details">
             <img src={iconsSidebar.logo2} alt="Avatar" />
             <div className="name-job">
-              <p className="name">John Wick</p>
+              <p className="name">{nameUser}</p>
               <p className="job"> Wedding Planner</p>
             </div>
           </div>
