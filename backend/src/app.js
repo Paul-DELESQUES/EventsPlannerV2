@@ -10,9 +10,8 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
-    ],
+    origin: [process.env.FRONTEND_URL],
+    credentials: true,
   })
 );
 
@@ -31,5 +30,8 @@ const router = require("./router");
 app.use("/api", router);
 
 /* ************************************************************************* */
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 module.exports = app;

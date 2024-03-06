@@ -7,17 +7,10 @@ class UserManager extends AbstractManager {
 
   // C
 
-  async create({
-    email,
-    hashPassword,
-    lastname,
-    firstname,
-    createdDate,
-    lastConnection,
-  }) {
+  async create({ email, hashPassword, lastname, firstname }) {
     const [rows] = await this.database.query(
-      `insert into ${this.table} (email, hash_password, lastname, firstname, created_date, last_connection) values (?,?,?,?,?,?)`,
-      [email, hashPassword, lastname, firstname, createdDate, lastConnection]
+      `insert into ${this.table} (email, hash_password, lastname, firstname) values (?,?,?,?)`,
+      [email, hashPassword, lastname, firstname]
     );
 
     return rows.insertId;
@@ -51,17 +44,10 @@ class UserManager extends AbstractManager {
 
   // U
 
-  async update({
-    email,
-    hashPassword,
-    lastname,
-    firstname,
-    createdDate,
-    lastConnection,
-  }) {
+  async update({ email, hashPassword, lastname, firstname }) {
     const [rows] = await this.database.query(
-      `update ${this.table} set email=?, hash_password=?, lastname=?, firstname=?, created_date=?, last_connection=?`,
-      [email, hashPassword, lastname, firstname, createdDate, lastConnection]
+      `update ${this.table} set email=?, hash_password=?, lastname=?, firstname=?`,
+      [email, hashPassword, lastname, firstname]
     );
     return rows;
   }

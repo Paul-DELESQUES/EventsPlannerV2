@@ -6,7 +6,7 @@ const tables = require("../tables");
 const login = async (req, res, next) => {
   try {
     const user = await tables.users.readByEmailWithPassword(req.body.email);
-    if (user == null) {
+    if (user === null) {
       res.status(422).json({ message: "Invalid email or password" });
       return;
     }
@@ -18,6 +18,7 @@ const login = async (req, res, next) => {
         expiresIn: "1h",
       });
       res.cookie("token", token, { httpOnly: true });
+      res.json(user);
     } else {
       res.status(422).json({ message: "Invalid email or password" });
     }
@@ -26,6 +27,13 @@ const login = async (req, res, next) => {
   }
 };
 
+const logout = (req, res) => {
+  res
+    .clearCookie("token", { httpOnly: true, path: "/", maxAge: 0 })
+    .sendStatus(200);
+};
+
 module.exports = {
   login,
+  logout,
 };

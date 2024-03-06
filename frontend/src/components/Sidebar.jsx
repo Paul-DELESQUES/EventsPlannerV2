@@ -3,15 +3,27 @@ import { AiOutlineUser } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { IoCalendarNumber } from "react-icons/io5";
 import { MdEventNote } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import iconsSidebar from "../assets";
 import "../sass/Sidebar.scss";
 
 function Sidebar() {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const navigate = useNavigate();
 
   const handleClickLink = (index) => {
     setActiveLinkIndex(index);
+  };
+
+  const handleLogout = () => {
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`, {
+        withCredentials: true,
+      })
+      .then(() => navigate("/"))
+      .catch((err) => {
+        console.error(err);
+      });
   };
   const navLinks = [
     {
@@ -67,7 +79,7 @@ function Sidebar() {
             </div>
           </div>
           <Link to="/">
-            <BiLogOut className="logout-icon" />
+            <BiLogOut className="logout-icon" onClick={() => handleLogout()} />
           </Link>
         </div>
       </div>

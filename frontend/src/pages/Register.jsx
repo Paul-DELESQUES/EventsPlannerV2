@@ -1,14 +1,16 @@
-import { useRef, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 
 import "../sass/Register.scss";
 
 function Register() {
-  const emailRef = useRef();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [hashPassword, setHashPassword] = useState("");
+  const [hashPassword2, setHashPassword2] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [firstname, setFirstname] = useState("");
 
   const [typePwd, setTypePwd] = useState(true);
   const [typePwd2, setTypePwd2] = useState(true);
@@ -16,61 +18,35 @@ function Register() {
   const navigate = useNavigate();
 
   const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
+    setFirstname(event.target.value);
   };
 
   const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
+    setLastname(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
-    setTimeout(() => {
+  const handleSubmit = async () => {
+    if (hashPassword !== hashPassword2) {
+      alert("Les mots de passe ne correspondent pas");
+      return;
+    }
+    const userRegister = {
+      email,
+      password: hashPassword,
+      lastname,
+      firstname,
+    };
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
+        userRegister
+      );
+      console.info("Success:", response);
       navigate("/connexion");
-    }, 500);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
-
-  // try {
-  //   const response = await fetch(
-  //     `${import.meta.env.VITE_BACKEND_URL}/api/users`,
-  //     {
-  //       method: "post",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         email: emailRef.current.value.toString(),
-  //         password,
-  //         profile: "Structure",
-  //       }),
-  //     }
-  //   );
-
-  //   if (response.status === 201) {
-  //     const userData = await response.json();
-
-  //     const structureResponse = await fetch(
-  //       `${import.meta.env.VITE_BACKEND_URL}/api/structures`,
-  //       {
-  //         method: "post",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           userId: userData.insertId,
-  //           email: emailRef.current.value.toString(),
-  //         }),
-  //       }
-  //     );
-
-  //     if (structureResponse.status === 201) {
-  //       navigate("/pro/login");
-  //     } else {
-  //       console.info(structureResponse);
-  //     }
-  //   } else {
-  //     console.info(response);
-  //   }
-  // } catch (err) {
-  //   console.error(err);
-  // }
 
   return (
     <div className="register connexion">
@@ -83,23 +59,23 @@ function Register() {
         <h3>Création de compte</h3>
 
         <form>
-          <label htmlFor="firstName">
+          <label htmlFor="firstname">
             <input
               required
               type="text"
-              name="firstName"
-              id="firstName"
+              name="firstname"
+              id="firstname"
               onChange={handleFirstNameChange}
             />
             <p>Prénom</p>
           </label>
 
-          <label htmlFor="lastName">
+          <label htmlFor="lastname">
             <input
               required
               type="text"
-              name="lastName"
-              id="lastName"
+              name="lastname"
+              id="lastname"
               onChange={handleLastNameChange}
             />
             <p>Nom</p>
@@ -124,7 +100,7 @@ function Register() {
               name="mdp"
               id="mdp"
               onChange={(event) => {
-                setPassword(event.target.value);
+                setHashPassword(event.target.value);
               }}
             />
             <p>Mot de passe</p>
@@ -144,7 +120,7 @@ function Register() {
               name="mdp2"
               id="mdp2"
               onChange={(event) => {
-                setPassword2(event.target.value);
+                setHashPassword2(event.target.value);
               }}
             />
             <p>Confirmer Mot de passe</p>

@@ -8,6 +8,12 @@
   color: $clr-white;
   height: 90%;
 
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    height: auto;
+  }
+
   .input-group {
     margin-left: 1rem;
     padding: 10px 10px;
