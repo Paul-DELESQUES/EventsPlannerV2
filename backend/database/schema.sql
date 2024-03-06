@@ -12,8 +12,6 @@ create table users (
   hash_password text not null,
   lastname varchar(80) not null,
   firstname varchar(80) not null,
-  created_date datetime,
-  last_connection datetime,
   constraint unique_email unique (email)
 );
 
