@@ -14,10 +14,14 @@ const login = async (req, res, next) => {
 
     if (verified) {
       delete user.hash_password;
-      const token = jwt.sign({ sub: user.id }, process.env.APP_SECRET, {
+      const token = jwt.sign({ id: user.id }, process.env.APP_SECRET, {
         expiresIn: "1h",
       });
-      res.cookie("token", token, { httpOnly: true });
+      res.cookie("user_token", token, {
+        httpOnly: true,
+        path: "/",
+        maxAge: 3600000,
+      });
       res.json(user);
     } else {
       res.status(422).json({ message: "Invalid email or password" });
@@ -33,7 +37,27 @@ const logout = (req, res) => {
     .sendStatus(200);
 };
 
+const checkAuth = (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.json({ isAuthenticated: false });
+    }
+
+    jwt.verify(token, process.env.APP_SECRET, (err) => {
+      if (err) {
+        return res.json({ isAuthenticated: false });
+      } else {
+        return res.json({ isAuthenticated: true });
+      }
+    });
+  } catch (err) {
+    return res.json({ isAuthenticated: false });
+  }
+};
+
 module.exports = {
+  checkAuth,
   login,
   logout,
 };

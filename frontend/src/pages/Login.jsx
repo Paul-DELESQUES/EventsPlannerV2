@@ -1,19 +1,19 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import "../sass/Login.scss";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typePwd, setTypePwd] = useState(true);
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setUser } = useAuth();
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const userLogin = {
       email,
@@ -27,7 +27,7 @@ function Login() {
       );
       const auth = response.data;
       if (auth) {
-        setIsAuthenticated(true);
+        setUser(auth);
         navigate("/dashboard/agenda");
       } else {
         console.error("Invalid id", auth);
@@ -48,7 +48,7 @@ function Login() {
         </Link>
         <h3>Se connecter</h3>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
           <label htmlFor="email">
             <input
               required
