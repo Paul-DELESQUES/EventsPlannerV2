@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
@@ -15,15 +16,15 @@ function Sidebar() {
     setActiveLinkIndex(index);
   };
 
-  const handleLogout = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`, {
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`, {
         withCredentials: true,
-      })
-      .then(() => navigate("/"))
-      .catch((err) => {
-        console.error(err);
       });
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
   const navLinks = [
     {

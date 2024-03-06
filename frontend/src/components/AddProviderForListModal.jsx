@@ -45,7 +45,6 @@ function AddProviderForListModal({ visible, onClose, onAdd }) {
         `${import.meta.env.VITE_BACKEND_URL}/api/providers`,
         provider
       );
-      console.info("Success:", response);
       onClose(response.data);
       onAdd();
     } catch (error) {
