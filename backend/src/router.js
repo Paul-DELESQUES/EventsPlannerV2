@@ -2,10 +2,23 @@ const express = require("express");
 
 const router = express.Router();
 
+const { hashPassword, verifyToken } = require("./middlewares/auth");
+
 // Import itemControllers module for handling item-related operations
 const eventControllers = require("./controllers/eventControllers");
 const customerControllers = require("./controllers/customerControllers");
 const providerControllers = require("./controllers/providerControllers");
+const userControllers = require("./controllers/userControllers");
+
+//users
+
+router.get("/users", userControllers.browse);
+router.get("/users/:id", userControllers.read);
+router.put("/users/:id", verifyToken, userControllers.edit);
+router.post("/users", hashPassword, userControllers.add);
+router.delete("/users/:id", userControllers.destroy);
+
+/* ************************************************************************* */
 
 router.get("/events", eventControllers.browse);
 router.post("/events", eventControllers.addEvents);
