@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
 import App from "./App";
 import Dashboard from "./layout/Dashboard";
@@ -32,19 +34,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: "agenda",
-            element: <Calendar />,
+            element: (
+              <ProtectedRoute>
+                <Calendar />
+              </ProtectedRoute>
+            ),
           },
           {
             path: "evenements",
-            element: <Events />,
+            element: (
+              <ProtectedRoute>
+                <Events />
+              </ProtectedRoute>
+            ),
           },
           {
             path: "prestataires",
-            element: <Providers />,
+            element: (
+              <ProtectedRoute>
+                <Providers />
+              </ProtectedRoute>
+            ),
           },
         ],
       },
@@ -56,6 +74,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

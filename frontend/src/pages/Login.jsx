@@ -1,13 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import "../sass/Login.scss";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typePwd, setTypePwd] = useState(true);
+  const { setIsAuthenticated } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -23,8 +26,8 @@ function Login() {
         { withCredentials: true }
       );
       const auth = response.data;
-      console.log(auth);
       if (auth) {
+        setIsAuthenticated(true);
         navigate("/dashboard/agenda");
       } else {
         console.error("Invalid id", auth);
