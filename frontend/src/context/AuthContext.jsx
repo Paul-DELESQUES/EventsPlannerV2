@@ -15,6 +15,15 @@ const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const isAuthenticated = user !== null;
 
+  const logout = async () => {
+    try {
+      await axios.post("/users/logout", {}, { withCredentials: true });
+      setUser(null);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -39,8 +48,8 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const contextValue = useMemo(
-    () => ({ user, setUser, isAuthenticated, isLoading }),
-    [user, setUser, isAuthenticated, isLoading]
+    () => ({ user, setUser, isAuthenticated, isLoading, logout }),
+    [user, setUser, isAuthenticated, isLoading, logout]
   );
 
   return (

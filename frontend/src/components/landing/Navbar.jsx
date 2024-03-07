@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="nav">
       <div className="logo-ctn">
-        <img src={iconsSidebar.logo2} alt="" className="logo-nav" />
+        <img src={iconsSidebar.logo} alt="" className="logo-nav" />
         <p className="logotxt">Events Planner</p>
       </div>
       <Link to="/connexion" className="connect-nav">

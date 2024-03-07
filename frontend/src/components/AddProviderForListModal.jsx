@@ -12,7 +12,7 @@ function AddProviderForListModal({ visible, onClose, onAdd }) {
     borderRadius: "1.5rem",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
     width: "50%",
-    height: "80%",
+    height: "60%",
   };
   const [civility, setCivility] = useState("mr");
   const [lastname, setLastname] = useState("");
