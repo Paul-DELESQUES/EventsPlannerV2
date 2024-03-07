@@ -18,7 +18,7 @@ function Footer() {
                 window.scrollTo(0, 0);
               }}
             >
-              <img src={iconsSidebar.logo2} alt="" className="logo-footer" />
+              <img src={iconsSidebar.logo} alt="" className="logo-footer" />
               <p className="logotxtfooter">Events Planner</p>
             </div>
             <p className="footerAddress">

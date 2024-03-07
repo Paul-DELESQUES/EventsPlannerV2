@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
@@ -12,10 +11,11 @@ import "../sass/Sidebar.scss";
 function Sidebar() {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
   const { user } = useAuth();
+  const { logout } = useAuth();
   const nameUser =
     user && user.firstname && user.lastname
       ? `${user.firstname} ${user.lastname}`
-      : "NULL";
+      : "";
 
   const navigate = useNavigate();
 
@@ -23,16 +23,16 @@ function Sidebar() {
     setActiveLinkIndex(index);
   };
 
-  const handleLogout = async () => {
-    try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`, {
-        withCredentials: true,
-      });
-      navigate("/");
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`, {
+  //       withCredentials: true,
+  //     });
+  //     navigate("/");
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   const navLinks = [
     {
       id: 1,
@@ -87,7 +87,7 @@ function Sidebar() {
             </div>
           </div>
           <Link to="/">
-            <BiLogOut className="logout-icon" onClick={() => handleLogout()} />
+            <BiLogOut className="logout-icon" onClick={() => logout} />
           </Link>
         </div>
       </div>
