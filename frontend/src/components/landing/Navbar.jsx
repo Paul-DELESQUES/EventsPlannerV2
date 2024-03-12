@@ -10,7 +10,7 @@ function Navbar() {
       </div>
       <Link to="/connexion" className="connect-nav">
         <button type="button" className="btn-nav">
-          <span>Se connecter</span>
+          <span className="connect">Se connecter</span>
           <span className="arrow">➜</span>
         </button>
       </Link>

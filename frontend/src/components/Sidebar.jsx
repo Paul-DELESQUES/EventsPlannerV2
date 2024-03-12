@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
+import { FiMenu, FiX } from "react-icons/fi";
 import { IoCalendarNumber } from "react-icons/io5";
 import { MdEventNote } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import iconsSidebar from "../assets";
 import { useAuth } from "../context/AuthContext";
 import "../sass/Sidebar.scss";
 
 function Sidebar() {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user } = useAuth();
   const { logout } = useAuth();
   const nameUser =
@@ -17,22 +19,14 @@ function Sidebar() {
       ? `${user.firstname} ${user.lastname}`
       : "";
 
-  const navigate = useNavigate();
-
   const handleClickLink = (index) => {
     setActiveLinkIndex(index);
+    setIsSidebarOpen(false);
   };
-
-  // const handleLogout = async () => {
-  //   try {
-  //     await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`, {
-  //       withCredentials: true,
-  //     });
-  //     navigate("/");
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const handleBurgerClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    console.log("Menu burger clicked. isSidebarOpen:", !isSidebarOpen);
+  };
   const navLinks = [
     {
       id: 1,
@@ -54,44 +48,54 @@ function Sidebar() {
     },
   ];
 
+  console.log("Rendering Sidebar. isSidebarOpen:", isSidebarOpen);
+
   return (
-    <section className="sidebar">
-      <div className="logo-ctn">
-        <img src={iconsSidebar.logo2} alt="Logo" className="logo" />
+    <>
+      <div
+        className={`burger-menu ${isSidebarOpen ? "open" : ""}`}
+        onClick={handleBurgerClick}
+      >
+        {isSidebarOpen ? <FiX size={30} color="white" /> : <FiMenu size={30} />}
       </div>
-      <nav className="navbar">
-        <ul className="nav-list">
-          {navLinks.map((navLink, index) => (
-            <li className="nav-item" key={navLink.id}>
-              <Link
-                to={`${navLink.url}`}
-                className={`nav-link ${
-                  index === activeLinkIndex ? "active" : null
-                }`}
-                onClick={() => handleClickLink(index)}
-              >
-                {navLink.img}
-                <span className="nav-link-text">{navLink.title}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div className="profile-content">
-        <div className="profile">
-          <div className="profile-details">
-            <img src={iconsSidebar.logo2} alt="Avatar" />
-            <div className="name-job">
-              <p className="name">{nameUser}</p>
-              <p className="job"> Wedding Planner</p>
-            </div>
-          </div>
-          <Link to="/">
-            <BiLogOut className="logout-icon" onClick={() => logout} />
-          </Link>
+      <section className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
+        <div className="logo-ctn">
+          <img src={iconsSidebar.logo2} alt="Logo" className="logo" />
         </div>
-      </div>
-    </section>
+        <nav className="navbar">
+          <ul className="nav-list">
+            {navLinks.map((navLink, index) => (
+              <li className="nav-item" key={navLink.id}>
+                <Link
+                  to={`${navLink.url}`}
+                  className={`nav-link ${
+                    index === activeLinkIndex ? "active" : null
+                  }`}
+                  onClick={() => handleClickLink(index)}
+                >
+                  {navLink.img}
+                  <span className="nav-link-text">{navLink.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="profile-content">
+          <div className="profile">
+            <div className="profile-details">
+              <img src={iconsSidebar.logo2} alt="Avatar" />
+              <div className="name-job">
+                <p className="name">{nameUser}</p>
+                <p className="job"> Wedding Planner</p>
+              </div>
+            </div>
+            <Link to="/">
+              <BiLogOut className="logout-icon" onClick={() => logout} />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 

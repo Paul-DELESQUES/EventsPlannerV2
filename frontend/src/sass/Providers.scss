@@ -32,16 +32,14 @@
   }
   .table-container {
     padding: 3rem 5rem;
-
-    // .MuiTableRow-root,
-    // .MuiTableCell-root {
-    //   // border: none !important;
-    // }
     .icons-edit-providers,
     .icons-delete-providers {
       margin-left: 0.8rem;
       font-size: 0.9rem;
       cursor: pointer;
+    }
+    @media (max-width: 390px) {
+      padding: 3rem 2rem;
     }
   }
 }

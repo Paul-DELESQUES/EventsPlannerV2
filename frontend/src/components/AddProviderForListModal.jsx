@@ -6,14 +6,18 @@ import "rodal/lib/rodal.css";
 import "../sass/AddProviderModal.scss";
 
 function AddProviderForListModal({ visible, onClose, onAdd }) {
+  const isSmallScreen = window.matchMedia("(max-width: 390px)").matches;
+
   const customStyles = {
     background: "rgb(246, 240, 240)",
     padding: "1rem",
-    borderRadius: "1.5rem",
+    borderRadius: isSmallScreen ? "0rem" : "1.5rem",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
-    width: "50%",
-    height: "60%",
+    width: isSmallScreen ? "100%" : "50%",
+    height: isSmallScreen ? "100vh" : "60%",
+    overflow: "auto",
   };
+
   const [civility, setCivility] = useState("mr");
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
