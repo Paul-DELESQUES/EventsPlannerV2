@@ -6,13 +6,16 @@ import "rodal/lib/rodal.css";
 import "../sass/AddEventModal.scss";
 
 function AddEventModal({ visible, onClose, onNext }) {
+  const isSmallScreen = window.matchMedia("(max-width: 390px)").matches;
+
   const customStyles = {
     background: "rgb(246, 240, 240)",
     padding: "1rem",
-    borderRadius: "1.5rem",
+    borderRadius: isSmallScreen ? "0rem" : "1.5rem",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
-    width: "60%",
-    height: "70%",
+    width: isSmallScreen ? "100%" : "50%",
+    height: isSmallScreen ? "100vh" : "60%",
+    overflow: "auto",
   };
   const [eventType, setEventType] = useState("wedding");
   const [eventStartDate, setEventStartDate] = useState("");

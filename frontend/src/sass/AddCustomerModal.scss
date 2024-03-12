@@ -5,6 +5,12 @@
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin: 20px 20px;
+  @media (max-width: 390px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 
   .info-customers {
     grid-row: 1;
@@ -14,9 +20,22 @@
     display: flex;
     align-items: center;
     gap: 10rem;
+
+    @media (max-width: 390px) {
+      padding: 0.5rem 0.5rem;
+      grid-row: unset;
+      grid-column: unset;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 1rem;
+    }
     .input-info {
       display: flex;
       flex-direction: column;
+      @media (max-width: 390px) {
+        width: 100%;
+      }
       margin-left: 1rem;
 
       .label {
@@ -39,6 +58,9 @@
         border-radius: 8px;
         resize: none;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        @media (max-width: 390px) {
+          width: 95%;
+        }
       }
     }
   }
@@ -52,12 +74,23 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    @media (max-width: 390px) {
+      grid-row: unset;
+      grid-column: unset;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
     .input-group {
       display: flex;
       flex-direction: column;
       margin: 0;
       padding: 10px 10px;
       width: 30%;
+      @media (max-width: 390px) {
+        width: 100%;
+      }
 
       .label {
         font-weight: bold;
@@ -85,6 +118,9 @@
       margin: 0;
       padding: 10px 10px;
       width: 90%;
+      @media (max-width: 390px) {
+        width: 100%;
+      }
 
       .label {
         font-weight: bold;
@@ -122,6 +158,13 @@
     font-size: 1rem;
     font-weight: 600;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    @media (max-width: 390px) {
+      grid-column-start: unset;
+      grid-row-start: unset;
+      margin-top: 1rem;
+      width: 90%;
+      font-size: 1.2rem;
+    }
   }
 
   .saveButton-customers:disabled {

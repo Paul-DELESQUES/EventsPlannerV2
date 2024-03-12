@@ -88,4 +88,50 @@
       }
     }
   }
+  @media (max-width: 770px) {
+    .events-main {
+      .event-card {
+        width: 350px; // Réduire la largeur de la carte
+        height: 150px; // Réduire la hauteur de la carte
+
+        img {
+          width: 70px; // Réduire la largeur du logo
+          height: 70px; // Réduire la hauteur du logo
+          margin: 0 2rem 0 2rem;
+        }
+
+        .event-info {
+          h4 {
+            font-size: 1.2em; // Réduire la taille de la police du titre
+          }
+          p {
+            font-size: 0.8em; // Réduire la taille de la police du paragraphe
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 390px) {
+    .events-main {
+      .event-card {
+        width: 350px; // Réduire la largeur de la carte
+        height: 150px; // Réduire la hauteur de la carte
+
+        img {
+          width: 70px; // Réduire la largeur du logo
+          height: 70px; // Réduire la hauteur du logo
+          margin: 0 2rem 0 2rem;
+        }
+
+        .event-info {
+          h4 {
+            font-size: 1.2em; // Réduire la taille de la police du titre
+          }
+          p {
+            font-size: 0.8em; // Réduire la taille de la police du paragraphe
+          }
+        }
+      }
+    }
+  }
 }

@@ -17,9 +17,26 @@
       width: 8vw;
       height: 9vh;
       border-radius: 50%;
+      @media (max-width: 770px) {
+        width: 12vw;
+        height: 7vh;
+      }
+
+      @media (max-width: 390px) {
+        width: 10vw;
+        height: 5vh;
+      }
     }
     .logotxt {
       font-size: 1.8rem;
+      @media (max-width: 770px) {
+        font-size: 1.5rem;
+      }
+
+      @media (max-width: 390px) {
+        font-size: 1.2rem;
+        margin-left: 1rem;
+      }
     }
   }
 
@@ -38,14 +55,32 @@
       border-radius: 50px;
       transition: 0.3s ease-in-out;
       cursor: pointer;
+      @media (max-width: 770px) {
+        gap: 15px;
+        padding: 15px 25px 10px 25px;
+      }
+
+      @media (max-width: 390px) {
+        gap: 5px;
+        padding: 10px 15px 15px 10px;
+      }
 
       & span {
         font-size: 1.2rem;
       }
 
+      .connect {
+        @media (max-width: 390px) {
+          display: none;
+        }
+      }
+
       .arrow {
-        font-size: 1.5rem;
+        font-size: 2rem;
         color: $clr-quaternary;
+        @media (max-width: 390px) {
+          padding: 0.1rem 1rem 0 1.1rem;
+        }
       }
 
       &:hover {
