@@ -1,0 +1,57 @@
+@import "variables.scss";
+
+.modal-delete {
+  position: absolute;
+  bottom: 51.2%;
+  left: 77.9%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 150px;
+  border-radius: 1.2rem;
+  border: 2px solid $clr-secondary;
+  background-color: rgba($color: $clr-quaternary, $alpha: 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0 1.5rem;
+  color: $clr-white;
+  z-index: 1000;
+
+  .modal-content {
+    h2 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      margin: 0;
+      padding-bottom: 0.5rem;
+    }
+
+    p {
+      font-style: italic;
+      font-weight: bold;
+      color: red;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    button {
+      width: 60px;
+      height: 30px;
+      border-radius: 5px;
+      font-size: 1rem;
+      margin-top: 0.8rem;
+      margin-left: 3.5rem;
+      font-weight: bold;
+      color: $clr-white;
+      background-color: transparent;
+      border: 1px solid $clr-white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $clr-white;
+        color: $clr-quaternary;
+      }
+    }
+  }
+}

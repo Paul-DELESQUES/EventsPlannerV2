@@ -4,12 +4,15 @@ import { MdDeleteForever, MdEditNote } from "react-icons/md";
 import iconsSidebar from "../assets";
 import AddCustomerModal from "../components/AddCustomerModal";
 import AddEventModal from "../components/AddEventModal";
+import ModalDelete from "../components/ModalDelete";
 import "../sass/Events.scss";
 
 function Events() {
   const [currentModal, setCurrentModal] = useState(null);
   const [eventId, setEventID] = useState(null);
   const [events, setEvents] = useState([]);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteEventId, setDeleteEventId] = useState(null);
 
   const fetchEvents = async () => {
     const { data } = await axios.get(
@@ -54,15 +57,23 @@ function Events() {
     setCurrentModal("customer");
   };
 
-  const handleDeleteEvent = async (id) => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/eventspage/${id}`
-      );
-      fetchEvents();
-    } catch (error) {
-      console.error("Failed to delete event", error);
+  const handleDeleteEvent = (id) => {
+    setDeleteEventId(id);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDeleteEvent = async () => {
+    if (deleteEventId) {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_BACKEND_URL}/api/eventspage/${deleteEventId}`
+        );
+        fetchEvents();
+      } catch (error) {
+        console.error("Failed to delete event", error);
+      }
     }
+    setDeleteModalOpen(false);
   };
 
   const eventTypeMap = {
@@ -97,6 +108,11 @@ function Events() {
           onAdd={fetchEvents}
         />
       )}
+      <ModalDelete
+        visible={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onDelete={confirmDeleteEvent}
+      />
       <div className="events-main">
         {events.map((event) => {
           return (
