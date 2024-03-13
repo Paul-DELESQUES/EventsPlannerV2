@@ -1,6 +1,7 @@
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import "../sass/AddProviderModal.scss";
@@ -15,7 +16,7 @@ function AddProviderForListModal({ visible, onClose, onAdd }) {
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
     width: isSmallScreen ? "100%" : "50%",
     height: isSmallScreen ? "100vh" : "60%",
-    overflow: "auto",
+    overflow: isSmallScreen ? "auto" : "hidden",
   };
 
   const [civility, setCivility] = useState("mr");
@@ -30,7 +31,8 @@ function AddProviderForListModal({ visible, onClose, onAdd }) {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
 
-  const handleSubmitProvider = async () => {
+  const handleSubmitProvider = async (e) => {
+    e.preventDefault();
     const provider = {
       civility,
       lastname,
@@ -51,6 +53,7 @@ function AddProviderForListModal({ visible, onClose, onAdd }) {
       );
       onClose(response.data);
       onAdd();
+      toast.info("Prestataire ajouté avec succès");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -58,131 +61,124 @@ function AddProviderForListModal({ visible, onClose, onAdd }) {
 
   return (
     <Rodal visible={visible} onClose={onClose} customStyles={customStyles}>
-      <div className="container-providers">
+      <form onSubmit={handleSubmitProvider} className="container-providers">
         <div className="provider-left">
-          <div className="input-group">
-            <span className="label">Civilité</span>
+          <label className="label">
+            Civilité
             <select
+              required
               value={civility}
               onChange={(e) => setCivility(e.target.value)}
-              className="input"
             >
               <option value="mr">Monsieur</option>
               <option value="mrs">Madame</option>
             </select>
-          </div>
-          <div className="input-group">
-            <span className="label">Nom</span>
+          </label>
+
+          <label className="label">
+            Nom
             <input
+              required
               type="text"
-              className="input"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Prénom</span>
+          </label>
+
+          <label className="label">
+            Prénom
             <input
+              required
               type="text"
-              className="input"
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Nom entreprise</span>
+          </label>
+
+          <label className="label">
+            Nom entreprise
             <input
+              required
               type="text"
-              className="input"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Type prestataire</span>
+          </label>
+
+          <label className="label">
+            Type prestataire
             <input
+              required
               type="text"
-              className="input"
               value={providerType}
               onChange={(e) => setProviderType(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">E-mail</span>
+          </label>
+
+          <label className="label">
+            E-mail
             <input
+              required
               type="text"
-              className="input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Téléphone</span>
+          </label>
+
+          <label className="label">
+            Téléphone
             <input
+              required
               type="text"
-              className="input"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-          </div>
-          <div className="input-address">
-            <span className="label">Adresse</span>
+          </label>
+          <label className="label">
+            Adresse
             <input
-              className="input"
+              required
               value={address}
               type="text"
+              className="input-address"
               onChange={(e) => setAddress(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Code Postale</span>
+          </label>
+
+          <label className="label">
+            Code Postale
             <input
-              className="input"
+              required
               value={zipCode}
               type="text"
               onChange={(e) => setZipCode(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Ville</span>
+          </label>
+
+          <label className="label">
+            Ville
             <input
-              className="input"
+              required
               value={city}
               type="text"
               onChange={(e) => setCity(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Pays</span>
+          </label>
+
+          <label className="label">
+            Pays
             <input
-              className="input"
+              required
               value={country}
               type="text"
               onChange={(e) => setCountry(e.target.value)}
             />
-          </div>
+          </label>
+          <button type="submit" className="saveButton-providers">
+            Valider
+          </button>
         </div>
-        <button
-          type="button"
-          disabled={
-            civility === "" ||
-            firstname === "" ||
-            lastname === "" ||
-            email === "" ||
-            phone === "" ||
-            address === "" ||
-            zipCode === "" ||
-            city === "" ||
-            country === ""
-          }
-          className="saveButton-providers"
-          onClick={() => {
-            handleSubmitProvider();
-          }}
-        >
-          Valider
-        </button>
-      </div>
+      </form>
     </Rodal>
   );
 }

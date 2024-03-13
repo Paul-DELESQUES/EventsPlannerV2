@@ -1,7 +1,8 @@
 @import "variables";
 
 .sidebar {
-  position: absolute;
+  position: fixed;
+  left: 0;
   background-color: $clr-quaternary;
   width: 300px;
   min-height: 100svh;
