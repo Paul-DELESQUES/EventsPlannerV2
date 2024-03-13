@@ -39,7 +39,7 @@ function Login() {
   };
 
   return (
-    <div className="login connexion">
+    <section className="login connexion">
       <main>
         <Link to="/inscription">
           <button type="button" className="login-register">
@@ -82,14 +82,12 @@ function Login() {
               {typePwd ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
             </button>
           </label>
-          <div className="button-bas">
-            <button className="butt grad" type="submit">
-              Se connecter
-            </button>
-          </div>
+          <button type="submit" className="button-bas">
+            Se connecter
+          </button>
         </form>
       </main>
-    </div>
+    </section>
   );
 }
 

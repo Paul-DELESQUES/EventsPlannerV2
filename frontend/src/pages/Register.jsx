@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
 import "../sass/Register.scss";
 
 function Register() {
@@ -25,9 +26,10 @@ function Register() {
     setLastname(event.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (hashPassword !== hashPassword2) {
-      alert("Les mots de passe ne correspondent pas");
+      toast.error("Les mots de passe ne correspondent pas");
       return;
     }
     const userRegister = {
@@ -41,15 +43,17 @@ function Register() {
         `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
         userRegister
       );
-      console.info("Success:", response);
-      navigate("/connexion");
+      if (response.status === 201) {
+        navigate("/connexion");
+        toast.info("Votre compte a bien été créé");
+      }
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   return (
-    <div className="register connexion">
+    <section className="register connexion">
       <main>
         <Link to="/connexion">
           <button type="button" className="se-connecter">
@@ -58,7 +62,7 @@ function Register() {
         </Link>
         <h3>Création de compte</h3>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="firstname">
             <input
               required
@@ -132,25 +136,12 @@ function Register() {
               {typePwd2 ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
             </button>
           </label>
+          <button type="submit" className="button-bas">
+            Créer un compte
+          </button>
         </form>
-
-        {/* {otherPassword && (
-          <p className="emailFail">
-            Cet email est déjà utilisé, vous pouvez vous connecter en haut à
-            droite
-          </p>
-        )} */}
       </main>
-      <div className="button-bas">
-        <button
-          type="button"
-          className="butt grad"
-          onClick={() => handleSubmit()}
-        >
-          Créer un compte
-        </button>
-      </div>
-    </div>
+    </section>
   );
 }
 export default Register;

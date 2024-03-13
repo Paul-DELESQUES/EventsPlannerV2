@@ -1,33 +1,57 @@
 @import "variables";
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 15% 15% 15% 55%;
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
   color: $clr-white;
   height: 90%;
   @media (max-width: 390px) {
-    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
   }
 
   .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
     margin-left: 1rem;
+    margin-top: 1rem;
     padding: 10px 10px;
     @media (max-width: 390px) {
-      width: 100%;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .label {
+    label {
       font-weight: 500;
       font-size: 1rem;
       color: $clr-black;
+      margin-top: 0.5rem;
+      width: 30%;
+      @media (max-width: 390px) {
+        margin-top: 0.3rem;
+        width: 90%;
+      }
     }
 
-    .input {
+    .input-important {
+      width: 170%;
+      @media (max-width: 390px) {
+        width: 90%;
+      }
+    }
+    .saveButton {
+      width: 30%;
+      @media (max-width: 390px) {
+        width: 80%;
+      }
+    }
+
+    input,
+    select,
+    textarea {
       color: $clr-black;
       margin-top: 0.5rem;
       background-color: $clr-quaternary;
@@ -40,51 +64,16 @@
       width: 100%;
       resize: none;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      @media (max-width: 390px) {
+        width: 90%;
+      }
     }
   }
-
-  .input-important {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    display: flex;
-    flex-direction: column;
-    margin-left: 1.5rem;
-    width: 90%;
-    @media (max-width: 390px) {
-      width: 90%;
-      margin-left: 0;
-    }
-
-    .label {
-      font-weight: 500;
-      font-size: 1rem;
-      color: $clr-black;
-    }
-
-    .input {
-      color: #626262;
-      margin-top: 0.5rem;
-      background-color: $clr-quaternary;
-      outline: none;
-      border: 1px solid $clr-white;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 300;
-      padding: 10px;
-      width: 105%;
-      resize: none;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    }
-  }
-
   .saveButton {
-    grid-column-start: 3;
-    grid-column-end: 4;
     align-self: end;
     justify-self: end;
     margin-right: 3rem;
     margin-bottom: 4rem;
-    width: 6rem;
     background: $clr-secondary;
     border: none;
     padding: 10px;
@@ -97,18 +86,9 @@
     @media (max-width: 390px) {
       display: flex;
       justify-content: center;
-      grid-column-start: unset;
-      grid-row-start: unset;
       margin-top: 1rem;
-      margin-right: 1rem;
       width: 90%;
       font-size: 1.2rem;
     }
-  }
-
-  .saveButton:disabled {
-    border: 1px solid $clr-secondary;
-    background: transparent;
-    color: $clr-secondary;
   }
 }

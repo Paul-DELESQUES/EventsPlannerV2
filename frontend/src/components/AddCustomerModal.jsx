@@ -1,6 +1,7 @@
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import "../sass/AddCustomerModal.scss";
@@ -14,12 +15,12 @@ function AddCustomerModal({ visible, onClose, eventId, onAdd }) {
     borderRadius: isSmallScreen ? "0rem" : "1.5rem",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
     width: isSmallScreen ? "100%" : "50%",
-    height: isSmallScreen ? "100vh" : "60%",
-    overflow: "auto",
+    height: isSmallScreen ? "100vh" : "80%",
+    overflow: isSmallScreen ? "auto" : "hidden",
   };
-  const [prospectSource, setProspectSource] = useState("instagram");
-  const [customerType, setCustomerType] = useState("single");
-  const [civility, setCivility] = useState("mr");
+  const [prospectSource, setProspectSource] = useState("");
+  const [customerType, setCustomerType] = useState("");
+  const [civility, setCivility] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -33,7 +34,9 @@ function AddCustomerModal({ visible, onClose, eventId, onAdd }) {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
 
-  const handleSubmitCustomer = async () => {
+  const handleSubmitCustomer = async (e) => {
+    e.preventDefault();
+
     const customer = {
       eventId,
       prospectSource,
@@ -57,12 +60,11 @@ function AddCustomerModal({ visible, onClose, eventId, onAdd }) {
         `${import.meta.env.VITE_BACKEND_URL}/api/customers`,
         customer
       );
-      console.info("Success:", response);
       if (response.data.isEventComplete) {
         onClose();
         onAdd();
+        toast.success("Evénement et client(s) ajouté(s) avec succès");
       } else {
-        alert("Please add another customer");
         setProspectSource("");
         setCustomerType("");
         setCivility("");
@@ -78,6 +80,7 @@ function AddCustomerModal({ visible, onClose, eventId, onAdd }) {
         setZipCode("");
         setCity("");
         setCountry("");
+        toast.info("Le client a bien été ajouté");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -86,183 +89,178 @@ function AddCustomerModal({ visible, onClose, eventId, onAdd }) {
 
   return (
     <Rodal visible={visible} onClose={onClose} customStyles={customStyles}>
-      <div className="container-customers">
+      <form onSubmit={handleSubmitCustomer} className="container-customers">
         <div className="info-customers">
           <div className="input-info">
-            <span className="label">Source du prospect</span>
-            <select
-              value={prospectSource}
-              onChange={(e) => setProspectSource(e.target.value)}
-              className="input"
-            >
-              <option value="word_of_mouth">Bouche à oreille</option>
-              <option value="instagram">Instagram</option>
-              <option value="facebook">Facebook</option>
-              <option value="mariage.net">Mariage.net</option>
-              <option value="linkedin">linkedin</option>
-            </select>
-          </div>
-          <div className="input-info">
-            <span className="label">Type clients</span>
-            <select
-              value={customerType}
-              onChange={(e) => setCustomerType(e.target.value)}
-              className="input"
-            >
-              <option value="single">Célibataire</option>
-              <option value="couple">Couple</option>
-              <option value="professional">Professionnel</option>
-            </select>
+            <label htmlFor="prospectSource">
+              Source du prospect
+              <select
+                required
+                value={prospectSource}
+                onChange={(e) => setProspectSource(e.target.value)}
+              >
+                <option value="word_of_mouth">Bouche à oreille</option>
+                <option value="instagram">Instagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="mariage.net">Mariage.net</option>
+                <option value="linkedin">linkedin</option>
+              </select>
+            </label>
+
+            <label htmlFor="customerType">
+              Type clients
+              <select
+                required
+                value={customerType}
+                onChange={(e) => setCustomerType(e.target.value)}
+              >
+                <option value="single">Célibataire</option>
+                <option value="couple">Couple</option>
+                <option value="professional">Professionnel</option>
+              </select>
+            </label>
           </div>
         </div>
+
         <div className="customer-left">
-          <div className="input-group">
-            <span className="label">Civilité</span>
+          <label htmlFor="civility">
+            Civilité
             <select
+              required
               value={civility}
               onChange={(e) => setCivility(e.target.value)}
-              className="input"
             >
               <option value="mr">Monsieur</option>
               <option value="mrs">Madame</option>
             </select>
-          </div>
-          <div className="input-group">
-            <span className="label">Nom</span>
+          </label>
+
+          <label htmlFor="lastname">
+            Nom
             <input
+              required
               type="text"
-              className="input"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Prénom</span>
+          </label>
+
+          <label htmlFor="firstname">
+            Prénom
             <input
+              required
               type="text"
-              className="input"
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">E-mail</span>
+          </label>
+
+          <label htmlFor="email">
+            E-mail
             <input
+              required
               type="text"
-              className="input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Téléphone</span>
+          </label>
+
+          <label htmlFor="phone">
+            Téléphone
             <input
+              required
               type="text"
-              className="input"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Profession</span>
+          </label>
+
+          <label htmlFor="job">
+            Profession
             <input
+              required
               type="text"
-              className="input"
               value={job}
               onChange={(e) => setJob(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Date de naissance</span>
+          </label>
+
+          <label htmlFor="dateOfBirth">
+            Date de naissance
             <input
-              className="input"
+              required
               value={dateOfBirth}
               type="date"
               onChange={(e) => setDateOfBirth(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Lieu de naissance</span>
+          </label>
+
+          <label htmlFor="label">
+            Lieu de naissance
             <input
-              className="input"
+              required
               value={placeOfBirth}
               type="text"
               onChange={(e) => setPlaceOfBirth(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Nationalité</span>
+          </label>
+
+          <label htmlFor="label">
+            Nationalité
             <input
-              className="input"
+              required
               value={nationality}
               type="text"
               onChange={(e) => setNationality(e.target.value)}
             />
-          </div>
-          <div className="input-address">
-            <span className="label">Adresse</span>
+          </label>
+
+          <label htmlFor="label">
+            Adresse
             <input
-              className="input"
+              required
               value={address}
               type="text"
+              className="input-address"
               onChange={(e) => setAddress(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Code Postale</span>
+          </label>
+
+          <label htmlFor="label">
+            Code Postale
             <input
-              className="input"
+              required
               value={zipCode}
               type="text"
               onChange={(e) => setZipCode(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Ville</span>
+          </label>
+
+          <label htmlFor="label">
+            Ville
             <input
-              className="input"
+              required
               value={city}
               type="text"
               onChange={(e) => setCity(e.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <span className="label">Pays</span>
+          </label>
+
+          <label htmlFor="label">
+            Pays
             <input
-              className="input"
+              required
               value={country}
               type="text"
               onChange={(e) => setCountry(e.target.value)}
             />
-          </div>
+          </label>
         </div>
-        <button
-          type="button"
-          disabled={
-            prospectSource === "" ||
-            customerType === "" ||
-            civility === "" ||
-            firstname === "" ||
-            lastname === "" ||
-            email === "" ||
-            phone === "" ||
-            job === "" ||
-            dateOfBirth === "" ||
-            placeOfBirth === "" ||
-            nationality === "" ||
-            address === "" ||
-            zipCode === "" ||
-            city === "" ||
-            country === ""
-          }
-          className="saveButton-customers"
-          onClick={() => {
-            handleSubmitCustomer();
-          }}
-        >
+
+        <button type="submit" className="saveButton-customers">
           Valider
         </button>
-      </div>
+      </form>
     </Rodal>
   );
 }

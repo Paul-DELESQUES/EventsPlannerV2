@@ -1,6 +1,7 @@
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import "../sass/AddEventModal.scss";
@@ -15,7 +16,7 @@ function AddEventModal({ visible, onClose, onNext }) {
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
     width: isSmallScreen ? "100%" : "50%",
     height: isSmallScreen ? "100vh" : "60%",
-    overflow: "auto",
+    overflow: isSmallScreen ? "auto" : "hidden",
   };
   const [eventType, setEventType] = useState("wedding");
   const [eventStartDate, setEventStartDate] = useState("");
@@ -28,7 +29,8 @@ function AddEventModal({ visible, onClose, onNext }) {
   const [budget, setBudget] = useState(null);
   const [importantNote, setImportantNote] = useState("");
 
-  const handleNextClick = async () => {
+  const handleNextClick = async (e) => {
+    e.preventDefault();
     const event = {
       eventType,
       eventStartDate,
@@ -46,8 +48,8 @@ function AddEventModal({ visible, onClose, onNext }) {
         `${import.meta.env.VITE_BACKEND_URL}/api/events`,
         event
       );
-      console.info("Success:", response);
       onNext(response.data.id);
+      toast.info("L'événement a bien été créé");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -55,128 +57,121 @@ function AddEventModal({ visible, onClose, onNext }) {
 
   return (
     <Rodal visible={visible} onClose={onClose} customStyles={customStyles}>
-      <div className="container">
+      <form onSubmit={handleNextClick} className="container">
         <div className="input-group">
-          <span className="label">Type de l'évenement</span>
-          <select
-            value={eventType}
-            onChange={(e) => setEventType(e.target.value)}
-            className="input"
-          >
-            <option value="wedding">Mariage</option>
-            <option value="baptism">Baptême</option>
-            <option value="gender_reveal">Gender Reveal</option>
-            <option value="baby_shower">Baby Shower</option>
-            <option value="anniversary">Anniversaire</option>
-            <option value="evjf">EVJF</option>
-            <option value="evg">EVG</option>
-            <option value="other">Autre</option>
-          </select>
+          <label htmlFor="label">
+            Type de l'évenement
+            <select
+              required
+              value={eventType}
+              onChange={(e) => setEventType(e.target.value)}
+            >
+              <option value="wedding">Mariage</option>
+              <option value="baptism">Baptême</option>
+              <option value="gender_reveal">Gender Reveal</option>
+              <option value="baby_shower">Baby Shower</option>
+              <option value="anniversary">Anniversaire</option>
+              <option value="evjf">EVJF</option>
+              <option value="evg">EVG</option>
+              <option value="other">Autre</option>
+            </select>
+          </label>
+
+          <label htmlFor="label">
+            Date de début
+            <input
+              required
+              type="date"
+              value={eventStartDate}
+              onChange={(e) => setEventStartDate(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="label">
+            Date de fin
+            <input
+              required
+              type="date"
+              value={eventEndDate}
+              onChange={(e) => setEventEndDate(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="label">
+            Heure de début
+            <input
+              required
+              type="time"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="label">
+            Heure de fin
+            <input
+              required
+              type="time"
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="label">
+            Lieu de l'évenement
+            <input
+              required
+              type="text"
+              value={eventLocation}
+              onChange={(e) => setEventLocation(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="label">
+            Prévisions des invités
+            <input
+              required
+              type="text"
+              value={guestsNumber}
+              onChange={(e) => setGuestsNumber(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="label">
+            Prévisions des enfants
+            <input
+              required
+              type="text"
+              value={childsNumber}
+              onChange={(e) => setChildsNumber(e.target.value)}
+            />
+          </label>
+
+          <label htmlFor="label">
+            Budget souhaité
+            <input
+              required
+              type="text"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+            />
+          </label>
+          <label htmlFor="label">
+            Note importante
+            <textarea
+              required
+              rows={10}
+              value={importantNote}
+              className="input-important"
+              type="text"
+              onChange={(e) => setImportantNote(e.target.value)}
+            />
+          </label>
+          <button type="submit" className="saveButton">
+            Suivant
+          </button>
         </div>
-        <div className="input-group">
-          <span className="label">Date de l'évenement</span>
-          <input
-            type="date"
-            className="input"
-            value={eventStartDate}
-            onChange={(e) => setEventStartDate(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <span className="label">Date de l'évenement</span>
-          <input
-            type="date"
-            className="input"
-            value={eventEndDate}
-            onChange={(e) => setEventEndDate(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <span className="label">Heure de début</span>
-          <input
-            type="time"
-            className="input"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <span className="label">Heure de fin</span>
-          <input
-            type="time"
-            className="input"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <span className="label">Lieu de l'évenement</span>
-          <input
-            type="text"
-            className="input"
-            value={eventLocation}
-            onChange={(e) => setEventLocation(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <span className="label">Prévisions des invités</span>
-          <input
-            type="text"
-            className="input"
-            value={guestsNumber}
-            onChange={(e) => setGuestsNumber(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <span className="label">Prévisions des enfants</span>
-          <input
-            type="text"
-            className="input"
-            value={childsNumber}
-            onChange={(e) => setChildsNumber(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <span className="label">Budget souhaité</span>
-          <input
-            type="text"
-            className="input"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-          />
-        </div>
-        <div className="input-important">
-          <span className="label">Note importante</span>
-          <textarea
-            rows={10}
-            className="input"
-            value={importantNote}
-            type="text"
-            onChange={(e) => setImportantNote(e.target.value)}
-          />
-        </div>
-        <button
-          type="button"
-          disabled={
-            eventType === "" ||
-            eventStartDate === "" ||
-            eventEndDate === "" ||
-            startTime === "" ||
-            endTime === "" ||
-            eventLocation === "" ||
-            guestsNumber === "" ||
-            childsNumber === "" ||
-            budget === "" ||
-            importantNote === ""
-          }
-          className="saveButton"
-          onClick={() => {
-            handleNextClick();
-          }}
-        >
-          Suivant
-        </button>
-      </div>
+      </form>
     </Rodal>
   );
 }
