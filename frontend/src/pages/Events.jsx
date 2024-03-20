@@ -4,12 +4,17 @@ import { MdDeleteForever, MdEditNote } from "react-icons/md";
 import iconsSidebar from "../assets";
 import AddCustomerModal from "../components/AddCustomerModal";
 import AddEventModal from "../components/AddEventModal";
+import EditEventModal from "../components/EditEventModal";
+import ModalDelete from "../components/ModalDelete";
 import "../sass/Events.scss";
 
 function Events() {
   const [currentModal, setCurrentModal] = useState(null);
   const [eventId, setEventID] = useState(null);
   const [events, setEvents] = useState([]);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteEventId, setDeleteEventId] = useState(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
   const fetchEvents = async () => {
     const { data } = await axios.get(
@@ -49,20 +54,37 @@ function Events() {
     setCurrentModal(null);
   };
 
+  const handleEditOpen = (id) => {
+    setEventID(id);
+    setEditModalOpen(true);
+  };
+  const handleEditClose = () => {
+    setEditModalOpen(false);
+    setEventID(null);
+  };
+
   const handleNextClick = (id) => {
     setEventID(id);
     setCurrentModal("customer");
   };
 
-  const handleDeleteEvent = async (id) => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/eventspage/${id}`
-      );
-      fetchEvents();
-    } catch (error) {
-      console.error("Failed to delete event", error);
+  const handleDeleteEvent = (id) => {
+    setDeleteEventId(id);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDeleteEvent = async () => {
+    if (deleteEventId) {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_BACKEND_URL}/api/eventspage/${deleteEventId}`
+        );
+        fetchEvents();
+      } catch (error) {
+        console.error("Failed to delete event", error);
+      }
     }
+    setDeleteModalOpen(false);
   };
 
   const eventTypeMap = {
@@ -97,18 +119,32 @@ function Events() {
           onAdd={fetchEvents}
         />
       )}
+      <ModalDelete
+        visible={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onDelete={confirmDeleteEvent}
+      />
+      <EditEventModal
+        visible={editModalOpen}
+        onClose={handleEditClose}
+        onAdd={fetchEvents}
+        eventId={eventId}
+      />
       <div className="events-main">
         {events.map((event) => {
           return (
             <div className="event-card" key={event.id}>
-              <img src={iconsSidebar.logo2} alt="Avatar" />
+              <img src={iconsSidebar.logo} alt="Avatar" />
               <div className="event-info">
                 <h4>{event.customerName.join(" & ")}</h4>
                 <p>{event.eventDateStart}</p>
                 <p>{eventTypeMap[event.eventType]}</p>
                 <p>{event.eventLocation}</p>
               </div>
-              <MdEditNote className="edit-icon" />
+              <MdEditNote
+                className="edit-icon"
+                onClick={() => handleEditOpen(event.id)}
+              />
               <MdDeleteForever
                 className="delete-icon"
                 onClick={() => handleDeleteEvent(event.id)}

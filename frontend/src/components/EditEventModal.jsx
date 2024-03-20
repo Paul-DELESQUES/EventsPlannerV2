@@ -1,12 +1,12 @@
 import axios from "axios";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import "../sass/AddEventModal.scss";
+import "../sass/EditEventModal.scss";
 
-function AddEventModal({ visible, onClose, onNext }) {
+function EditEventModal({ visible, onClose, onAdd, eventId }) {
   const isSmallScreen = window.matchMedia("(max-width: 390px)").matches;
 
   const customStyles = {
@@ -18,6 +18,7 @@ function AddEventModal({ visible, onClose, onNext }) {
     height: isSmallScreen ? "100vh" : "60%",
     overflow: isSmallScreen ? "auto" : "hidden",
   };
+
   const [eventType, setEventType] = useState("wedding");
   const [eventStartDate, setEventStartDate] = useState("");
   const [eventEndDate, setEventEndDate] = useState("");
@@ -29,9 +30,35 @@ function AddEventModal({ visible, onClose, onNext }) {
   const [budget, setBudget] = useState(null);
   const [importantNote, setImportantNote] = useState("");
 
-  const handleNextClick = async (e) => {
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/events/${eventId}`
+        );
+        setEventType(data.event_type);
+        setEventStartDate(data.event_date_start.split("T")[0]);
+        setEventEndDate(data.event_date_end.split("T")[0]);
+        setStartTime(data.start_time);
+        setEndTime(data.end_time);
+        setEventLocation(data.event_location);
+        setGuestsNumber(data.guests_number);
+        setChildsNumber(data.childs_number);
+        setBudget(data.budget);
+        setImportantNote(data.important_note);
+      } catch (error) {
+        console.error("Failed to fetch event data", error);
+      }
+    };
+
+    if (eventId) {
+      fetchEventData();
+    }
+  }, [eventId]);
+
+  const handleEdit = async (e) => {
     e.preventDefault();
-    const event = {
+    const eventData = {
       eventType,
       eventStartDate,
       eventEndDate,
@@ -43,21 +70,26 @@ function AddEventModal({ visible, onClose, onNext }) {
       budget: Number(budget),
       importantNote,
     };
+
+    console.log("Event data:", eventData);
+
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/events`,
-        event
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/events/${eventId}`,
+        eventData
       );
-      onNext(response.data.id);
-      toast.info("L'événement a bien été créé");
+      toast.success("Evénement mis à jour avec succès");
+      onClose();
+      onAdd();
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Failed to update event", error);
+      toast.error("Erreur lors de la mise à jour de l'événement");
     }
   };
 
   return (
     <Rodal visible={visible} onClose={onClose} customStyles={customStyles}>
-      <form onSubmit={handleNextClick} className="container">
+      <form onSubmit={handleEdit} className="container-edit">
         <div className="input-group">
           <label htmlFor="label">
             Type de l'évenement
@@ -168,7 +200,7 @@ function AddEventModal({ visible, onClose, onNext }) {
             />
           </label>
           <button type="submit" className="saveButton">
-            Suivant
+            Modifier
           </button>
         </div>
       </form>
@@ -176,10 +208,11 @@ function AddEventModal({ visible, onClose, onNext }) {
   );
 }
 
-AddEventModal.propTypes = {
+EditEventModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onNext: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  eventId: PropTypes.number.isRequired,
 };
 
-export default AddEventModal;
+export default EditEventModal;

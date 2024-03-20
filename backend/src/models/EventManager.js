@@ -69,26 +69,38 @@ class EventManager extends AbstractManager {
 
   async update({
     eventType,
-    eventDate,
+    eventStartDate,
+    eventEndDate,
+    startTime,
+    endTime,
     eventLocation,
     guestsNumber,
     childsNumber,
     budget,
     importantNote,
+    id,
   }) {
-    const [rows] = await this.database.query(
-      `update ${this.table} set event_type=?, event_date=?, event_location=?, guests_number=?, childs_number=?, budget=?, important_note=?`,
+    const startDate =
+      new Date(eventStartDate).toISOString().split("T")[0] + " " + startTime;
+    const endDate =
+      new Date(eventEndDate).toISOString().split("T")[0] + " " + endTime;
+    const result = await this.database.query(
+      `update ${this.table} set event_type=?, event_date_start=?, event_date_end=?, start_time=?, end_time=?, event_location=?, guests_number=?, childs_number=?, budget=?, important_note=? where id=?`,
       [
         eventType,
-        eventDate,
+        startDate,
+        endDate,
+        startTime,
+        endTime,
         eventLocation,
         guestsNumber,
         childsNumber,
         budget,
         importantNote,
+        id,
       ]
     );
-    return rows;
+    return result;
   }
 
   // D

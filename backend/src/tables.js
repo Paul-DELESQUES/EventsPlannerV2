@@ -7,12 +7,14 @@ const EventManager = require("./models/EventManager");
 const CustomerManager = require("./models/CustomerManager");
 const TodolistManager = require("./models/TodolistManager");
 const ProviderManager = require("./models/ProviderManager");
+const UserManager = require("./models/UserManager");
 
 const managers = [
   EventManager,
   CustomerManager,
   TodolistManager,
   ProviderManager,
+  UserManager,
 ];
 
 // Create an empty object to hold data managers for different tables

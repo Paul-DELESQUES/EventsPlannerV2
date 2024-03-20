@@ -37,14 +37,18 @@
     display: flex;
     flex-wrap: wrap;
     gap: 3rem;
-    justify-content: space-evenly;
     margin-top: 5rem;
+    padding-left: 12rem;
+    @media (max-width: 390px) {
+      padding-left: 0;
+      justify-content: center;
+    }
 
     .event-card {
       position: relative;
       background-color: $clr-white;
-      width: 550px;
-      height: 200px;
+      width: 350px;
+      height: 150px;
       display: flex;
       align-items: center;
       border: 1px solid $clr-quaternary;
@@ -54,9 +58,9 @@
         $clr-quaternary 0px 10px 5px -5px;
 
       img {
-        width: 100px;
-        height: 100px;
-        margin: 0 4rem 0 2rem;
+        width: 70px; // Réduire la largeur du logo
+        height: 70px; // Réduire la hauteur du logo
+        margin: 0 1rem 0 1rem;
         border-radius: 50%;
       }
 
@@ -65,10 +69,11 @@
         flex-direction: column;
         font-size: 1em;
         h4 {
-          font-size: 1.5em;
+          font-size: 1.2em;
           margin-bottom: 1rem;
         }
         p {
+          font-size: 0.8rem;
           margin: 0 0 1rem 0;
         }
       }

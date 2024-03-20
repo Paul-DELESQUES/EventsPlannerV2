@@ -1,60 +1,46 @@
+import axios from "axios";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "../context/AuthContext";
 import "../sass/Login.scss";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typePwd, setTypePwd] = useState(true);
+  const { setUser } = useAuth();
+
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    setTimeout(() => {
-      navigate("/dashboard/agenda");
-    }, 1000);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const userLogin = {
+      email,
+      password,
+    };
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
+        userLogin,
+        { withCredentials: true }
+      );
+      const auth = response.data;
+      if (auth) {
+        setUser(auth);
+        navigate("/dashboard/agenda");
+      } else {
+        console.error("Invalid id", auth);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Identifiants incorrects");
+    }
   };
 
-  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {
-  //     method: "post",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       email: emailRef.current.value,
-  //       password: passwordRef.current.value,
-  //       profile: "Structure",
-  //     }),
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((auth) => {
-  //       if (auth.token && (auth.user || auth.structure)) {
-  //         localStorage.setItem("structureToken", auth.token);
-  //         if (auth.user) {
-  //           localStorage.setItem("user", JSON.stringify(auth.user));
-  //         }
-  //         if (auth.structure) {
-  //           localStorage.setItem("structure", JSON.stringify(auth.structure));
-  //         }
-
-  //         window.location.href = "/pro/dashboard/";
-  //       } else {
-  //         console.error("Invalid server response:", auth);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error(
-  //         "There has been a problem with your fetch operation:",
-  //         error
-  //       );
-  //     });
-  // };
-
   return (
-    <div className="login connexion">
+    <section className="login connexion">
       <main>
         <Link to="/inscription">
           <button type="button" className="login-register">
@@ -63,7 +49,7 @@ function Login() {
         </Link>
         <h3>Se connecter</h3>
 
-        <form>
+        <form onSubmit={handleLogin}>
           <label htmlFor="email">
             <input
               required
@@ -97,18 +83,12 @@ function Login() {
               {typePwd ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
             </button>
           </label>
-        </form>
-        <div className="button-bas">
-          <button
-            className="butt grad"
-            type="submit"
-            onClick={() => handleSubmit()}
-          >
+          <button type="submit" className="button-bas">
             Se connecter
           </button>
-        </div>
+        </form>
       </main>
-    </div>
+    </section>
   );
 }
 
