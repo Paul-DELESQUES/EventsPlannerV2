@@ -83,9 +83,10 @@ class ProviderManager extends AbstractManager {
     zipCode,
     city,
     country,
+    id,
   }) {
-    const [rows] = await this.database.query(
-      `update ${this.table} set civility=?, name=?, lastname=?, firstname=?, provider_type=?, email=?, phone=?, address=?, zip_code=?, city=?, country=?`,
+    const rows = await this.database.query(
+      `update ${this.table} set civility=?, name=?, lastname=?, firstname=?, provider_type=?, email=?, phone=?, address=?, zip_code=?, city=?, country=? where id=?`,
       [
         civility,
         name,
@@ -98,6 +99,7 @@ class ProviderManager extends AbstractManager {
         zipCode,
         city,
         country,
+        id,
       ]
     );
     return rows;

@@ -1,0 +1,89 @@
+@import "variables";
+
+.container-providers-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 20px 20px;
+
+  @media (max-width: 390px) {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .provider-left {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    border: 1px solid #000;
+    border-radius: 1rem;
+    padding: 20px;
+
+    @media (max-width: 390px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: none;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 10px 10px;
+
+      @media (max-width: 390px) {
+        width: 100%;
+        padding: 0;
+      }
+
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: #626262;
+
+      input,
+      select {
+        color: #626262;
+        margin-top: 0.5rem;
+        background-color: $clr-quaternary;
+        outline: none;
+        border: 1px solid $clr-white;
+        font-size: 1rem;
+        font-weight: 300;
+        padding: 10px;
+        border-radius: 8px;
+        resize: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+        @media (max-width: 390px) {
+          width: 100%;
+        }
+      }
+    }
+
+    .input-address {
+      grid-column: span 3;
+    }
+  }
+
+  .saveButton-providers {
+    grid-column: span 3;
+    align-self: end;
+    justify-self: end;
+    width: 6rem;
+    background: $clr-secondary;
+    border: none;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+    @media (max-width: 390px) {
+      width: 80%;
+      margin: auto;
+    }
+  }
+}
