@@ -4,10 +4,13 @@ import { MaterialReactTable } from "material-react-table";
 import { useEffect, useMemo, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import AddProviderForListModal from "../components/AddProviderForListModal";
+import EditProviderModal from "../components/EditProviderModal";
 import "../sass/Providers.scss";
 function Providers() {
   const [currentModal, setCurrentModal] = useState(null);
   const [providersData, setProvidersData] = useState([]);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [currentProvider, setCurrentProvider] = useState(null);
 
   const getProvidersForList = async () => {
     try {
@@ -91,6 +94,15 @@ function Providers() {
   const handleModalClose = () => {
     setCurrentModal(null);
   };
+  const handleEdit = (provider) => {
+    setCurrentProvider(provider);
+    setEditModalOpen(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setEditModalOpen(false);
+    getProvidersForList();
+  };
 
   return (
     <section className="providers-content">
@@ -106,6 +118,14 @@ function Providers() {
         <AddProviderForListModal
           visible
           onClose={handleModalClose}
+          onAdd={getProvidersForList}
+        />
+      )}
+      {editModalOpen && currentProvider && (
+        <EditProviderModal
+          visible={editModalOpen}
+          onClose={handleCloseEditModal}
+          providerData={currentProvider}
           onAdd={getProvidersForList}
         />
       )}
