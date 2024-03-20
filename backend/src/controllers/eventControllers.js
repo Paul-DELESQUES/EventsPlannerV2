@@ -30,10 +30,15 @@ const read = async (req, res, next) => {
 // The E
 
 const edit = async (req, res, next) => {
+  const event = req.body;
+  const { id } = req.params;
+
+  console.log("ID:", id);
+  console.log("Event data:", event);
   try {
-    const { id } = req.params;
-    const event = req.body;
-    const [result] = await tables.events.update({ id, ...event });
+    const [result] = await tables.events.update({ ...event, id });
+
+    console.log("Update result:", result);
 
     if (result.affectedRows === 0) {
       res.sendStatus(404);
@@ -41,6 +46,7 @@ const edit = async (req, res, next) => {
       res.sendStatus(204);
     }
   } catch (err) {
+    console.error("Error in edit function:", err);
     res.sendStatus(500);
     next(err);
   }

@@ -24,7 +24,9 @@ router.delete("/users/:id", userControllers.destroy);
 /* ************************************************************************* */
 
 router.get("/events", eventControllers.browse);
+router.get("/events/:id", eventControllers.read);
 router.post("/events", eventControllers.addEvents);
+router.put("/events/:id", eventControllers.edit);
 router.delete("/eventspage/:id", eventControllers.destroy);
 
 /* ************************************************************************* */
