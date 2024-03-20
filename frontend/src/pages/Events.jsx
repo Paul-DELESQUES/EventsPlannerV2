@@ -70,7 +70,7 @@ function Events() {
 
   const handleDeleteEvent = (id) => {
     setDeleteEventId(id);
-    setDeleteModalOpen(true);
+    setDeleteModalOpen(!deleteModalOpen);
   };
 
   const confirmDeleteEvent = async () => {
@@ -119,11 +119,6 @@ function Events() {
           onAdd={fetchEvents}
         />
       )}
-      <ModalDelete
-        visible={deleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
-        onDelete={confirmDeleteEvent}
-      />
       <EditEventModal
         visible={editModalOpen}
         onClose={handleEditClose}
@@ -141,14 +136,23 @@ function Events() {
                 <p>{eventTypeMap[event.eventType]}</p>
                 <p>{event.eventLocation}</p>
               </div>
-              <MdEditNote
-                className="edit-icon"
-                onClick={() => handleEditOpen(event.id)}
-              />
-              <MdDeleteForever
-                className="delete-icon"
-                onClick={() => handleDeleteEvent(event.id)}
-              />
+              <div className="icons-cards">
+                <MdEditNote
+                  className="edit-icon"
+                  onClick={() => handleEditOpen(event.id)}
+                />
+                <MdDeleteForever
+                  className="delete-icon"
+                  onClick={() => handleDeleteEvent(event.id)}
+                />
+              </div>
+              {deleteModalOpen && deleteEventId === event.id && (
+                <ModalDelete
+                  onClose={() => handleDeleteEvent(null)}
+                  onDelete={confirmDeleteEvent}
+                  id={event.id}
+                />
+              )}
             </div>
           );
         })}

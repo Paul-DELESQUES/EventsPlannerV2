@@ -1,15 +1,13 @@
 import React from "react";
 import "../sass/ModalDelete.scss";
 
-function ModalDelete({ visible, onClose, onDelete }) {
-  if (!visible) return null;
-
+function ModalDelete({ onClose, onDelete, id }) {
   return (
     <div className="modal-delete">
-      <div className="modal-content">
-        <h2>Confirmer la suppression</h2>
-        <p>Êtes-vous sûr de vouloir supprimer cet événement ?</p>
-        <button onClick={onDelete}>Oui</button>
+      <h2 className="h2">Êtes-vous sûr de vouloir supprimer cet événement ?</h2>
+      <p>Cette action est irréversible</p>
+      <div className="btn-modaldelete">
+        <button onClick={() => onDelete(id)}>Oui</button>
         <button onClick={onClose}>Non</button>
       </div>
     </div>
