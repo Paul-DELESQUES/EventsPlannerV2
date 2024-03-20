@@ -50,6 +50,7 @@
       width: 350px;
       height: 150px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
       border: 1px solid $clr-quaternary;
       border-radius: 1.2rem;
@@ -68,6 +69,7 @@
         display: flex;
         flex-direction: column;
         font-size: 1em;
+        margin-left: -5rem;
         h4 {
           font-size: 1.2em;
           margin-bottom: 1rem;
@@ -77,19 +79,20 @@
           margin: 0 0 1rem 0;
         }
       }
-      .edit-icon {
-        position: absolute;
-        font-size: 2rem;
-        top: 10px;
-        right: 55px;
-        cursor: pointer;
-      }
-      .delete-icon {
-        position: absolute;
-        font-size: 1.7rem;
-        top: 12px;
-        right: 20px;
-        cursor: pointer;
+      .icons-cards {
+        display: flex;
+        align-content: center;
+        align-self: flex-start;
+        padding: 5px;
+        .edit-icon {
+          font-size: 2rem;
+          cursor: pointer;
+        }
+        .delete-icon {
+          font-size: 1.7rem;
+          margin-top: 0.1rem;
+          cursor: pointer;
+        }
       }
     }
   }
