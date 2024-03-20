@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 import "../sass/Login.scss";
 
@@ -34,7 +35,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Error:", error);
-      navigate("/");
+      toast.error("Identifiants incorrects");
     }
   };
 

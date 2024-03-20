@@ -4,6 +4,7 @@ import { MdDeleteForever, MdEditNote } from "react-icons/md";
 import iconsSidebar from "../assets";
 import AddCustomerModal from "../components/AddCustomerModal";
 import AddEventModal from "../components/AddEventModal";
+import EditEventModal from "../components/EditEventModal";
 import ModalDelete from "../components/ModalDelete";
 import "../sass/Events.scss";
 
@@ -13,6 +14,7 @@ function Events() {
   const [events, setEvents] = useState([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteEventId, setDeleteEventId] = useState(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
   const fetchEvents = async () => {
     const { data } = await axios.get(
@@ -50,6 +52,15 @@ function Events() {
 
   const handleModalClose = () => {
     setCurrentModal(null);
+  };
+
+  const handleEditOpen = (id) => {
+    setEventID(id);
+    setEditModalOpen(true);
+  };
+  const handleEditClose = () => {
+    setEditModalOpen(false);
+    setEventID(null);
   };
 
   const handleNextClick = (id) => {
@@ -113,6 +124,12 @@ function Events() {
         onClose={() => setDeleteModalOpen(false)}
         onDelete={confirmDeleteEvent}
       />
+      <EditEventModal
+        visible={editModalOpen}
+        onClose={handleEditClose}
+        onAdd={fetchEvents}
+        eventId={eventId}
+      />
       <div className="events-main">
         {events.map((event) => {
           return (
@@ -124,7 +141,10 @@ function Events() {
                 <p>{eventTypeMap[event.eventType]}</p>
                 <p>{event.eventLocation}</p>
               </div>
-              <MdEditNote className="edit-icon" />
+              <MdEditNote
+                className="edit-icon"
+                onClick={() => handleEditOpen(event.id)}
+              />
               <MdDeleteForever
                 className="delete-icon"
                 onClick={() => handleDeleteEvent(event.id)}
